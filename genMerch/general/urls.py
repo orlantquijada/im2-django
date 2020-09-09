@@ -1,7 +1,5 @@
 from django.urls import path
 
-app_name = 'customers'
-
-url_patterns = [
+url_patters = [
     # insert general urls here
 ]
