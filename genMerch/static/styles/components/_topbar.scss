@@ -1,0 +1,69 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 1;
+  padding: 10px 0;
+
+  border-bottom: 1px solid #d8d8d8;
+
+  .container {
+    height: 64px;
+
+    @include flexbox($justify: space-between);
+  }
+
+  .user {
+    @include flexbox;
+
+    &__name {
+      margin-right: 1rem;
+    }
+
+    &__picture {
+      width: 2.25rem;
+      height: 2.25rem;
+
+      cursor: pointer;
+    }
+  }
+
+  .navigation {
+    @include flexbox;
+
+    .nav-item {
+      cursor: pointer;
+      text-decoration: none;
+
+      color: $gray4;
+
+      border-radius: $default-radius;
+      padding: 0.75rem 1.5rem;
+
+      transition: background-color 200ms ease, color 200ms ease,
+        filter 200ms ease;
+
+      @include flexbox;
+
+      &:first-child {
+        margin-right: 1.5rem;
+      }
+
+      &:hover {
+        color: $gray5;
+        background-color: $gray0;
+      }
+
+      &--selected {
+        color: $gray5;
+        font-weight: $bold;
+        background-color: $gray0;
+
+        &:hover {
+          filter: brightness(90%);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,674 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+      defer
+    ></script>
+    <script src="{% static '/scripts/index.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
+    <title>Customer Registration</title>
+  </head>
+
+  <body>
+    <div class="app">
+      <div class="topbar">
+        <div class="container">
+          <a href="./index.html"
+            ><img src="{% static '/assets/images/logo.svg' %}" alt=""
+          /></a>
+          <nav class="navigation">
+            <a
+              href="./customers.html"
+              class="nav-item nav-item--selected"
+              id="customers"
+              >Customers</a
+            >
+            <a href="./products.html" class="nav-item" id="products"
+              >Products</a
+            >
+          </nav>
+          <div class="user">
+            <span class="user__name">Doe, John</span>
+            <img
+              src="{%static '/assets/images/profile-pic.svg' %}"
+              alt=""
+              class="user__picture"
+            />
+          </div>
+        </div>
+      </div>
+      <main class="bg-color--gray">
+        <div class="container flex-grow-1 flex-shrink-0 py-5">
+          <div class="mb-5 p-4 bg-white shadow-sm">
+            <h3>Customer Registration</h3>
+            <div id="stepper1" class="bs-stepper">
+              <div class="bs-stepper-header mb-4" role="tablist">
+                <div class="step" data-target="#test-l-1">
+                  <button
+                    type="button"
+                    class="step-trigger"
+                    role="tab"
+                    id="stepper1trigger1"
+                    aria-controls="test-l-1"
+                  >
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">Personal Information</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-2">
+                  <button
+                    type="button"
+                    class="step-trigger"
+                    role="tab"
+                    id="stepper1trigger2"
+                    aria-controls="test-l-2"
+                  >
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label">Educational Background</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-3">
+                  <button
+                    type="button"
+                    class="step-trigger"
+                    role="tab"
+                    id="stepper1trigger3"
+                    aria-controls="test-l-3"
+                  >
+                    <span class="bs-stepper-circle">3</span>
+                    <span class="bs-stepper-label"
+                      >Professional Background</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <div class="bs-stepper-content">
+                <form onSubmit="return false">
+                  <div
+                    id="test-l-1"
+                    role="tabpanel"
+                    class="bs-stepper-pane"
+                    aria-labelledby="stepper1trigger1"
+                  >
+                    <div class="form-group row">
+                      <label for="dateRegistered" class="col-2 col-form-label"
+                        >Date Registered</label
+                      >
+                      <div class="col-4">
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="dateRegistered"
+                          placeholder="Date Today"
+                        />
+                      </div>
+                      <label class="col-2 col-form-label">Employee ID</label>
+                      <div class="col-4">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="emId"
+                          placeholder="Employee ID"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-12">Name</label>
+                      <div class="col">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="fName"
+                          placeholder="First Name"
+                        />
+                      </div>
+                      <div class="col">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="mName"
+                          placeholder="Middle Name"
+                        />
+                      </div>
+                      <div class="col">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lName"
+                          placeholder="Last Name"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-12">Address</label>
+                      <div class="col-12">
+                        <input
+                          type="text"
+                          class="form-control my-2"
+                          id="fName"
+                          placeholder="Street/Brgy/City"
+                        />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lName"
+                          placeholder="Province"
+                        />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="lName"
+                          placeholder="Zip"
+                        />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lName"
+                          placeholder="Country"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="bdate">Birthdate</label>
+                        <input type="date" class="form-control" id="bdate" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" class="form-control">
+                          <option value="single">Single</option>
+                          <option value="married">Married</option>
+                          <option value="widow">Widow/er</option>
+                          <option value="divorced">Divorced</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="">Gender</label>
+                        <select id="gender" name="gender" class="form-control">
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="spouse">Spouse's Name</label>
+                        <input type="text" class="form-control" id="spouse" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="spouseOcc">Spouse Occupation</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="spouseOcc"
+                        />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>No. of Children</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="childNo"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="mother">Mother's Name</label>
+                        <input type="text" class="form-control" id="mother" />
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="motherOcc">Occupation</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="motherOcc"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="father">Father's Name</label>
+                        <input type="text" class="form-control" id="father" />
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="fatherOcc">Occupation</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="fatherOcc"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="height">Height</label>
+                        <input type="number" class="form-control" id="height" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="weight">Weight</label>
+                        <input type="number" class="form-control" id="weight" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Religion</label>
+                        <input type="text" class="form-control" id="religion" />
+                      </div>
+                    </div>
+
+                    <div class="form-row buttons mt-4">
+                      <button
+                        class="btn btn-primary next"
+                        onclick="stepper1.next()"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    id="test-l-2"
+                    role="tabpanel"
+                    class="bs-stepper-pane"
+                    aria-labelledby="stepper1trigger2"
+                  >
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="elementary"><b>Elementary</b></label>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>School</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="elemSchool"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="elemGrade"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Year Completed</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="elemGraduated"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Awards</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <textarea
+                          class="form-control"
+                          id="elemSchool"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="elementary"
+                          ><b>Junior High School</b></label
+                        >
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>School</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="juniorSchool"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="juniorGrade"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Year Completed</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="juniorGraduated"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Awards</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <textarea
+                          class="form-control"
+                          id="elemSchool"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="elementary"
+                          ><b>Senior High School</b></label
+                        >
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>School</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="seniorSchool"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="seniorGrade"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Year Completed</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="seniorGraduated"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Strand</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input type="text" class="form-control" id="strand" />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Awards</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <textarea
+                          class="form-control"
+                          id="elemSchool"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="elementary"><b>College</b></label>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>School</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="seniorSchool"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Course</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="seniorGrade"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="seniorGraduated"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Year Completed</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input type="number" class="form-control" id="strand" />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Awards</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <textarea
+                          class="form-control"
+                          id="elemSchool"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="elementary"><b>Post-Graduate</b></label>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>School</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="seniorSchool"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Course</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="seniorGrade"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="seniorGraduated"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Year Completed</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input type="number" class="form-control" id="strand" />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Awards</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <textarea
+                          class="form-control"
+                          id="elemSchool"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="form-row buttons mt-4">
+                      <button
+                        class="btn btn-primary previous"
+                        onclick="stepper1.previous()"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        class="btn btn-primary next"
+                        onclick="stepper1.next()"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    id="test-l-3"
+                    role="tabpanel"
+                    class="bs-stepper-pane"
+                    aria-labelledby="stepper1trigger3"
+                  >
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="elementary"><b>Trainings</b></label>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Title</label></div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="seniorSchool"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">
+                        &nbsp; &nbsp;<label>Sponsor</label>
+                      </div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="seniorGrade"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Date</label></div>
+                      <div class="col-10 mx-0">
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="seniorGraduated"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-2">&nbsp; &nbsp;<label>Venue</label></div>
+                      <div class="col-10 mx-0">
+                        <input type="text" class="form-control" id="strand" />
+                      </div>
+                    </div>
+
+                    <div class="form-row buttons mt-4">
+                      <button
+                        class="btn btn-primary previous"
+                        onclick="stepper1.previous()"
+                      >
+                        Previous
+                      </button>
+                      <button type="submit" class="btn btn-primary next">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
+    <script>
+      const stepper1 = new Stepper(document.querySelector("#stepper1"));
+    </script>
+  </body>
+</html>
