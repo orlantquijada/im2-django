@@ -16,15 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from genMerch.customers.urls import url_patters as CUSTOMERS_URLS
-from genMerch.general.urls import url_patters as GENERAL_URLS
-
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
-
-if GENERAL_URLS:
-    urlpatterns.append(GENERAL_URLS)
-
-if CUSTOMERS_URLS:
-    urlpatterns.append(CUSTOMERS_URLS)
