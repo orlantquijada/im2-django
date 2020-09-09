@@ -82,6 +82,7 @@ body {
       -ms-flex-positive: 1;
           flex-grow: 1;
   background-color: #f1f3f5;
+  position: relative;
 }
 
 .main-content .add {

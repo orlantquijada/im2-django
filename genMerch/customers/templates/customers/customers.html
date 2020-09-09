@@ -8,16 +8,20 @@
     <meta name="description" content="" />
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
     <!--datatable css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
+    />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
       defer
     ></script>
     <script src="{% static '/scripts/index.js' %}" defer></script>
     <script src="{% static '/scripts/filterHandler.js' %}" defer></script>
-
-   
   </head>
   <body>
     <div class="app">
@@ -27,10 +31,7 @@
             ><img src="{% static '/assets/images/logo.svg' %}" alt=""
           /></a>
           <nav class="navigation">
-            <a
-              href="./customers.html"
-              class="nav-item nav-item--selected"
-              id="customers"
+            <a href="index" class="nav-item nav-item--selected" id="customers"
               >Customers</a
             >
             <a href="./products.html" class="nav-item" id="products"
@@ -49,8 +50,14 @@
       </div>
 
       <main class="main-content" data-router-wrapper>
+        <form action="" method="POST" class="add">
+          {% csrf_token %}
+          <a>
+            <button type="submit" class="add__btn">Add Customer</button>
+          </a>
+        </form>
         <div class="container" data-router-view>
-         <!-- <div class="header">
+          <!-- <div class="header">
             <div class="filter">
               <div class="main-container">
                 <div class="title">
@@ -109,11 +116,11 @@
             </div>
             
           </div>-->
-          <table id="customer1" class = "table table-striped table-bordered">
+          <table id="customer1" class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th>First Name</th>
-                <th>Last  Name</th>
+                <th>Last Name</th>
                 <th>Birthdate</th>
                 <th>City</th>
                 <th>Date Registered</th>
@@ -225,7 +232,209 @@
                 <td>Cebu City</td>
                 <td>Dec 1, 2020</td>
               </tr>
-              
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>Jan 1,2020</td>
+                <td>Cebu City</td>
+                <td>Dec 1, 2020</td>
+              </tr>
             </tbody>
 
             <!--<div class="table-row table-header">
@@ -368,28 +577,20 @@
           </div>
           <div>-->
           </table>
-          
-          <form action="" method ="POST">
-            {% csrf_token %}
-            <a class="add">
-              <button type= "submit" class="add__btn">Add Customer</button>
-            </a>
-          </form> 
         </div>
-        
       </main>
     </div>
     <!--bootstrapJS-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-     <!--datatable-->
+    <!--datatable-->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
-      $(document).ready(function() {
-          $('#customer1').DataTable();
-      } );
+      $(document).ready(function () {
+        $("#customer1").DataTable();
+      });
     </script>
   </body>
 </html>
