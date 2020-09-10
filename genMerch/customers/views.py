@@ -1,15 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import View, TemplateView
 
-# Create your views here.
+def customer_index_view(request):
+    return render(request, 'customers/customers.html')
 
-class CustomerIndexView(View):
-    def get(self, request):
-        return render(request, 'customers/customers.html')
-
-    def post(self, request):
-        return render(request, 'customers/customer_reg.html')
-
-class CustomerRegView(View):
-    def get(self, request):
-        return render(request, 'customers/customer_reg.html')
+def customer_registration_view(request):
+    return render(request, 'customers/customer_reg.html')
