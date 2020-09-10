@@ -1,0 +1,65 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
+  </head>
+
+  <body>
+    <div class="topbar">
+      <div class="container">
+        <a href="./index.html" class="logo"
+          ><img src="{% static '/assets/images/logo.svg' %}" alt=""
+        /></a>
+        <div class="nav">
+          <a href="#" class="nav-item">About</a>
+          <a href="#" class="nav-item">Services</a>
+          <a href="#" class="nav-item">Products</a>
+          <a href="#" class="nav-item">Pricing</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="landing-page">
+      <div class="container">
+        <div class="hero-content">
+          <img
+            src="{% static '/assets/images/logo.svg' %}"
+            alt=""
+            class="hero-content__company-logo"
+          />
+          <h3 class="hero-content__subtitle">
+            Lorem ipsum dolor sit amet consectetur adipisicing.
+          </h3>
+        </div>
+        <div class="login-card">
+          <input
+            type="text"
+            name=""
+            id=""
+            class="username auth full"
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            name=""
+            id=""
+            class="password auth full"
+            placeholder="Password"
+          />
+          <a href="./customers.html">
+            <button class="login auth full">Log In</button>
+          </a>
+          <a href="#" class="forget">Forgot Password?</a>
+
+          <!-- <button class="sign-up auth">Sign Up</button>-->
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

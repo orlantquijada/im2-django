@@ -23,6 +23,11 @@ body {
   font-size: 16px;
 }
 
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+
 .app {
   height: 100vh;
   width: 100%;
@@ -159,21 +164,23 @@ body {
 }
 
 .main-content .table tbody tr td:last-child button {
-  border: none;
+  border: 1px solid black;
   background-color: transparent;
   cursor: pointer;
+  padding: 0 0.5rem;
+  border-radius: 6px;
 }
 
 .main-content .table tbody tr td:last-child button:first-child {
   margin-right: 1rem;
 }
 
-.main-content .table tbody tr td:last-child button:first-child:hover svg path {
-  fill: #007bff;
+.main-content .table tbody tr td:last-child button:first-child:hover {
+  background-color: #ffb885;
 }
 
-.main-content .table tbody tr td:last-child button:last-child:hover svg path {
-  fill: #ff3a29;
+.main-content .table tbody tr td:last-child button:last-child:hover {
+  background-color: #ff8585;
 }
 
 .main-content .table tbody .odd:nth-child(even),
