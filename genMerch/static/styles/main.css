@@ -138,7 +138,7 @@ body {
   background-color: white;
 }
 
-.main-content .table thead tr th:hover {
+.main-content .table thead tr th:hover:not(:last-child) {
   -webkit-filter: brightness(95%);
           filter: brightness(95%);
 }
@@ -151,6 +151,11 @@ body {
 .main-content .table thead tr th:last-child {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
+  cursor: default;
+}
+
+.main-content .table thead tr th:last-child::before, .main-content .table thead tr th:last-child::after {
+  content: none;
 }
 
 .main-content .table tbody tr td:last-child button {

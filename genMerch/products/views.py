@@ -1,15 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import View, TemplateView
 
-# Create your views here.
+def product_index_view(request):
+    return render(request, 'products/products.html', {'is_customer': False})
 
-class ProductIndexView(View):
-    def get(self, request):
-        return render(request, 'products/products.html')
-
-    def post(self, request):
-        return render(request, 'products/product_reg.html')
-
-class ProductRegView(View):
-    def get(self, request):
-        return render(request, 'products/product_reg.html')
+def product_registration_view(request):
+    return render(request, 'products/product_reg.html', {'is_customer': False})

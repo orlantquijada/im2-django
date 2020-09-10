@@ -50,7 +50,7 @@
         color: $h-black;
         background-color: white;
 
-        &:hover {
+        &:hover:not(:last-child) {
           filter: brightness(95%);
         }
 
@@ -62,6 +62,12 @@
         &:last-child {
           border-top-right-radius: $default-radius;
           border-bottom-right-radius: $default-radius;
+          cursor: default;
+        }
+
+        &:last-child::before,
+        &:last-child::after {
+          content: none;
         }
       }
     }
