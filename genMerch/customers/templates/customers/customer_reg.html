@@ -31,7 +31,7 @@
 
 {% block content %}
     <div class="app">
-      {% include './navbar.html'%}
+      {% include './navbar.html' with is_customer=is_customer %}
 
       <main class="bg-color--gray">
         <div class="container flex-grow-1 flex-shrink-0 py-5">

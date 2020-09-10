@@ -1,13 +1,15 @@
+{% extends './base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="Description" content="Enter your description here" />
+{% block scripts %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+      defer
+    ></script>
+    <script src="{% static '/scripts/index.js' %}" defer></script>
+{% endblock scripts %}
 
+{% block stylesheets %}
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
@@ -17,47 +19,17 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     />
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
-      defer
-    ></script>
-    <script src="{% static '/scripts/index.js' %}" defer></script>
-
-    <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
     <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <title>Product Registration</title>
-  </head>
 
-  <body>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+
+{% endblock stylesheets %}
+
+{% block title %} Product Registration {% endblock title %}
+
+{% block content %}
     <div class="app">
-      <div class="topbar">
-        <div class="container">
-          <a href="./index.html"
-            ><img src="{% static 'assets/images/logo.svg' %}" alt=""
-          /></a>
-          <nav class="navigation">
-            <a href="./customers.html" class="nav-item" id="customers"
-              >Customers</a
-            >
-            <a
-              href="./products.html"
-              class="nav-item nav-item--selected"
-              id="products"
-              >Products</a
-            >
-          </nav>
-          <div class="user">
-            <span class="user__name">Doe, John</span>
-            <img
-              src="{% static '/assets/images/profile-pic.svg' %}"
-              alt=""
-              class="user__picture"
-            />
-          </div>
-        </div>
-      </div>
-
+      {% include './navbar.html' with is_customer=is_customer %}
       <main class="bg-color--gray">
         <div class="container flex-grow-1 flex-shrink-0 py-5">
           <div class="mb-5 p-4 bg-white shadow">
@@ -258,5 +230,4 @@
             }
         }
     </script>
-  </body>
-</html>
+{% endblock content %}
