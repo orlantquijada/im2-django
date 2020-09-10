@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $lato, sans-serif;
+  color: $h-black;
+  background-color: #f1f3f5;
+}
+
+:root {
+  font-size: 16px;
+}
+
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.app {
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-color--gray {
+  background-color: $gray0;
+  flex-grow: 1;
+}
+
+// bootstrap stuff
+.modal-content {
+  .modal-header {
+    background-color: $h-black;
+
+    h2 {
+      font-size: 1rem !important;
+    }
+
+    h2,
+    button,
+    span {
+      color: white;
+    }
+  }
+
+  .modal-body {
+    padding: 2rem;
+    @include flexbox($direction: column);
+
+    .title {
+      margin: 1rem 0;
+      font-weight: $bold;
+      text-align: center;
+
+      padding-bottom: 2rem;
+
+      border-bottom: 1px solid rgba($color: #333333, $alpha: 0.3);
+    }
+
+    strong {
+      color: $primary-blue !important;
+    }
+
+    .ours {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-areas: 'pur pos' 'per per';
+      row-gap: 2rem;
+      column-gap: 4rem;
+
+      & div {
+        @include flexbox($direction: column, $justify: flex-start);
+
+        h5 {
+          font-weight: $bold;
+          font-size: 1.5rem;
+        }
+
+        p {
+          text-align: center;
+        }
+      }
+
+      .per {
+        grid-area: per;
+        padding: 0 10rem;
+      }
+      .pos {
+        grid-area: pos;
+      }
+      .pur {
+        grid-area: pur;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+$metropolis: "Metropolis";
+$inter: "Inter";
+$lato: "Lato";
+
+@font-face {
+  font-family: $metropolis;
+  src: url("../../assets/fonts/Metropolis-Bold.ttf");
+  src: url("../../assets/fonts/Metropolis-Bold.woff"),
+    url("../../assets/fonts/Metropolis-Bold.woff2");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+$normal: 400;
+$bold: 700;

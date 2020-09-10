@@ -1,0 +1,215 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+      defer
+    ></script>
+    <script src="{% static '/scripts/index.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block stylesheets %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+
+{% endblock stylesheets %}
+
+{% block title %} Product Registration {% endblock title %}
+
+{% block content %}
+    <div class="app">
+      {% include './navbar.html' with is_customer=is_customer %}
+      <main class="bg-color--gray">
+        <div class="container flex-grow-1 flex-shrink-0 py-5">
+          <div class="mb-5 p-4 bg-white shadow">
+            <h3>Product Registration</h3>
+            &nbsp;
+            <h5>Product Information:</h5>
+            <form id="prodReg">
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Date Registered</label>
+                </div>
+                <div class="col-9">
+                  <input type="date" class="form-control" id="prodDateReg" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>SKU</label>
+                </div>
+                <div class="col-9">
+                  <input type="number" class="form-control" id="sku" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Category</label>
+                </div>
+                <div class="col-9">
+                  <input type="text" class="form-control" id="category" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Name</label>
+                </div>
+                <div class="col-9">
+                  <input type="text" class="form-control" id="prodName" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Brand</label>
+                </div>
+                <div class="col-9">
+                  <input type="text" class="form-control" id="prodbrand" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Color</label>
+                </div>
+                <div class="col-9">
+                  <input type="text" class="form-control" id="prodcolor" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Size/Dimension</label>
+                </div>
+                <div class="col-9">
+                  <input type="number" class="form-control" id="prodsize" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Price</label>
+                </div>
+                <div class="col-9">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="prodPrice"
+                    placeholder="Php"
+                  />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>No. of Stocks</label>
+                </div>
+                <div class="col-9">
+                  <input type="number" class="form-control" id="prodStocks" />
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Images</label>
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="col">
+                  <img id="img" src="#" alt="">
+                  <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" />
+                  
+                </div>
+                <div class="col">
+                  <img id="img1" src="#" alt="">
+                  <input type="file" onchange="readURL2(this);" class="form-control" id="prodimg2" />
+                  
+                </div>
+                <div class="col">
+                  <img id="img2" src="#" alt="">
+                  <input type="file" onchange="readURL3(this);" class="form-control" id="prodimg3" />
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-center">
+                  <button type="submit" class="btn btn-primary next">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script>
+       function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+              //  alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img')
+                        .attr('src', e.target.result)
+                        .width(160)
+                        .height(160);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+               // alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img1')
+                        .attr('src', e.target.result)
+                        .width(160)
+                        .height(160);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+               // alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img2')
+                        .attr('src', e.target.result)
+                        .width(160)
+                        .height(160);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+{% endblock content %}
