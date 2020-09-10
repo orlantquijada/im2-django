@@ -1,0 +1,140 @@
+.landing-page {
+  height: 80vh;
+  background-color: $gray0;
+
+  .container {
+    padding-top: 10rem;
+    @include flexbox($justify: space-between);
+  }
+
+  .hero-content,
+  .login-card {
+    @include flexbox($direction: column, $align: flex-start);
+  }
+
+  .hero-content {
+    width: 350px;
+
+    &__company-logo {
+      height: 3.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__subtitle {
+      font-weight: $normal;
+      font-size: 1.75rem;
+    }
+  }
+
+  .login-card {
+    align-items: center;
+    background-color: white;
+    box-shadow: 20px 20px 60px #d9d9d9,
+      -20px -20px 60px rgba(255, 255, 255, 0.01);
+    padding: 2rem 1.5rem 0.75rem;
+    border-radius: 1rem;
+
+    .forget {
+      width: 100%;
+      text-decoration: none;
+      text-align: center;
+      color: #0069ff;
+    }
+
+    hr {
+      margin: 1.5rem 0 1rem;
+      width: 100%;
+      height: 1px;
+      background-color: #dddfe2;
+      border: none;
+    }
+
+    button.auth {
+      cursor: pointer;
+
+      font-weight: $bold;
+    }
+
+    input.auth {
+      outline: none;
+
+      &:focus {
+        border: 2px solid #0069ff;
+      }
+    }
+
+    .auth {
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #dddfe2;
+
+      font-size: 18px;
+      font-weight: $normal;
+      font-family: $lato;
+
+      margin-bottom: 1rem;
+
+      &.login {
+        background-color: #0069ff;
+        color: white;
+
+        transition: filter 200ms ease;
+
+        &:hover {
+          filter: brightness(90%);
+        }
+      }
+
+      &.sign-up {
+        width: 40%;
+        background-color: transparent;
+        border: 2px solid #0069ff;
+        color: #0069ff;
+
+        transition: background-color 200ms ease, color 200ms ease;
+
+        &:hover {
+          background-color: #0069ff;
+          color: white;
+        }
+      }
+
+      &.full {
+        width: 400px;
+      }
+    }
+  }
+}
+
+.topbar .container {
+  .logo {
+    height: 100%;
+
+    @include flexbox;
+  }
+
+  .nav {
+    height: 100%;
+
+    @include flexbox($justify: space-evenly);
+
+    .nav-item {
+      height: 100%;
+      text-decoration: none;
+      font-weight: bold;
+      color: $h-black;
+
+      transition: color 200ms ease;
+
+      @include flexbox;
+
+      &:not(:last-child) {
+        margin-right: 4rem;
+      }
+
+      &:hover {
+        color: #0069ff;
+      }
+    }
+  }
+}

@@ -1,0 +1,516 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@font-face {
+  font-family: "Metropolis";
+  src: url("../../assets/fonts/Metropolis-Bold.ttf");
+  src: url("../../assets/fonts/Metropolis-Bold.woff"), url("../../assets/fonts/Metropolis-Bold.woff2");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  color: #20123a;
+  background-color: #f1f3f5;
+}
+
+:root {
+  font-size: 16px;
+}
+
+.app {
+  height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.bg-color--gray {
+  background-color: #f1f3f5;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+#test-l-1 .buttons,
+#test-l-2 .buttons,
+#test-l-3 .buttons {
+  margin: 0;
+  padding: 0;
+}
+
+#test-l-2 .form-row,
+#test-l-3 .form-row {
+  margin-bottom: 1rem;
+}
+
+.bs-stepper-pane .buttons {
+  position: relative;
+  width: 100%;
+  height: 38px;
+}
+
+.bs-stepper-pane .buttons .btn {
+  position: absolute;
+  top: 0;
+}
+
+.bs-stepper-pane .buttons .btn.next {
+  right: 0;
+}
+
+.bs-stepper-pane .buttons .btn.previous {
+  left: 0;
+}
+
+.main-content {
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+}
+
+.main-content .header-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.main-content .header-form .dt-button, .main-content .header-form__btn {
+  border-radius: 6px;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  cursor: pointer;
+  -webkit-transition: -webkit-filter 200ms ease;
+  transition: -webkit-filter 200ms ease;
+  transition: filter 200ms ease;
+  transition: filter 200ms ease, -webkit-filter 200ms ease;
+  background: none;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  background: #ffe3e3;
+}
+
+.main-content .header-form .dt-button:hover, .main-content .header-form__btn:hover {
+  -webkit-filter: brightness(95%);
+          filter: brightness(95%);
+}
+
+.main-content .header-form .dt-button {
+  margin: 0;
+  margin-right: 1rem;
+  background: #ffe5d3;
+}
+
+.main-content .header-form .dt-button:hover {
+  background: #ffe5d3;
+}
+
+.main-content .table {
+  border-radius: 6px;
+}
+
+.main-content .table thead tr th:last-child {
+  width: 10px;
+}
+
+.main-content .table thead tr th {
+  color: #20123a;
+  background-color: white;
+}
+
+.main-content .table thead tr th:hover {
+  -webkit-filter: brightness(95%);
+          filter: brightness(95%);
+}
+
+.main-content .table thead tr th:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.main-content .table thead tr th:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.main-content .table tbody tr td:last-child button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.main-content .table tbody tr td:last-child button:first-child {
+  margin-right: 1rem;
+}
+
+.main-content .table tbody tr td:last-child button:first-child:hover svg path {
+  fill: #007bff;
+}
+
+.main-content .table tbody tr td:last-child button:last-child:hover svg path {
+  fill: #ff3a29;
+}
+
+.main-content .table tbody .odd:nth-child(even),
+.main-content .table tbody .even:nth-child(even) {
+  background-color: white;
+}
+
+.main-content .table tbody .odd:nth-child(odd),
+.main-content .table tbody .even:nth-child(odd) {
+  background-color: #f7f8fb;
+}
+
+.main-content .table tbody .odd:hover,
+.main-content .table tbody .even:hover {
+  background-color: #efeff3;
+}
+
+.main-content .table tbody .odd td,
+.main-content .table tbody .even td {
+  border: none;
+}
+
+.main-content .table tbody .odd td:last-child,
+.main-content .table tbody .even td:last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.topbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 1;
+  padding: 10px 0;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.topbar .container {
+  height: 64px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.topbar .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.topbar .user__name {
+  margin-right: 1rem;
+}
+
+.topbar .user__picture {
+  width: 2.25rem;
+  height: 2.25rem;
+  cursor: pointer;
+}
+
+.topbar .navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.topbar .navigation .nav-item {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  -webkit-transition: background-color 200ms ease, color 200ms ease, -webkit-filter 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease, -webkit-filter 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease, filter 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease, filter 200ms ease, -webkit-filter 200ms ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.topbar .navigation .nav-item:first-child {
+  margin-right: 1.5rem;
+}
+
+.topbar .navigation .nav-item:hover {
+  color: #495057;
+  background-color: #f1f3f5;
+}
+
+.topbar .navigation .nav-item--selected {
+  color: #495057;
+  font-weight: 700;
+  background-color: #f1f3f5;
+}
+
+.topbar .navigation .nav-item--selected:hover {
+  -webkit-filter: brightness(90%);
+          filter: brightness(90%);
+}
+
+.landing-page {
+  height: 80vh;
+  background-color: #f1f3f5;
+}
+
+.landing-page .container {
+  padding-top: 10rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.landing-page .hero-content,
+.landing-page .login-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.landing-page .hero-content {
+  width: 350px;
+}
+
+.landing-page .hero-content__company-logo {
+  height: 3.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.landing-page .hero-content__subtitle {
+  font-weight: 400;
+  font-size: 1.75rem;
+}
+
+.landing-page .login-card {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  -webkit-box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px rgba(255, 255, 255, 0.01);
+          box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px rgba(255, 255, 255, 0.01);
+  padding: 2rem 1.5rem 0.75rem;
+  border-radius: 1rem;
+}
+
+.landing-page .login-card .forget {
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+  color: #0069ff;
+}
+
+.landing-page .login-card hr {
+  margin: 1.5rem 0 1rem;
+  width: 100%;
+  height: 1px;
+  background-color: #dddfe2;
+  border: none;
+}
+
+.landing-page .login-card button.auth {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.landing-page .login-card input.auth {
+  outline: none;
+}
+
+.landing-page .login-card input.auth:focus {
+  border: 2px solid #0069ff;
+}
+
+.landing-page .login-card .auth {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dddfe2;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Lato";
+  margin-bottom: 1rem;
+}
+
+.landing-page .login-card .auth.login {
+  background-color: #0069ff;
+  color: white;
+  -webkit-transition: -webkit-filter 200ms ease;
+  transition: -webkit-filter 200ms ease;
+  transition: filter 200ms ease;
+  transition: filter 200ms ease, -webkit-filter 200ms ease;
+}
+
+.landing-page .login-card .auth.login:hover {
+  -webkit-filter: brightness(90%);
+          filter: brightness(90%);
+}
+
+.landing-page .login-card .auth.sign-up {
+  width: 40%;
+  background-color: transparent;
+  border: 2px solid #0069ff;
+  color: #0069ff;
+  -webkit-transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.landing-page .login-card .auth.sign-up:hover {
+  background-color: #0069ff;
+  color: white;
+}
+
+.landing-page .login-card .auth.full {
+  width: 400px;
+}
+
+.topbar .container .logo {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.topbar .container .nav {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.topbar .container .nav .nav-item {
+  height: 100%;
+  text-decoration: none;
+  font-weight: bold;
+  color: #20123a;
+  -webkit-transition: color 200ms ease;
+  transition: color 200ms ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.topbar .container .nav .nav-item:not(:last-child) {
+  margin-right: 4rem;
+}
+
+.topbar .container .nav .nav-item:hover {
+  color: #0069ff;
+}
+/*# sourceMappingURL=main.css.map */

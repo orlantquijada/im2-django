@@ -1,0 +1,769 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+      defer
+    ></script>
+    <script src="{% static '/scripts/index.js' %}" defer></script>
+    <script src="{% static '/scripts/filterHandler.js' %}" defer></script>
+{% endblock scripts%}
+
+{% block stylesheets %}
+    <!--datatable css-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"
+    />
+    <!--jqueryui for datepicker-->
+    <link
+      data-require="jqueryui@*"
+      data-semver="1.10.0"
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+
+{% endblock stylesheets%}
+
+{% block title %} Customers {% endblock title %}
+
+{% block content %}
+     <!-- Modal for view/edit -->
+     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="col-12">Name</label>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fName"
+                  placeholder="First Name"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mName"
+                  placeholder="Middle Name"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lName"
+                  placeholder="Last Name"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12">Address</label>
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="form-control my-2"
+                  id="address"
+                  placeholder="Street/Brgy/City"
+                />
+              </div>
+              <div class="col-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="province"
+                  placeholder="Province"
+                />
+              </div>
+              <div class="col-4">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="zip"
+                  placeholder="Zip"
+                />
+              </div>
+              <div class="col-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  placeholder="Country"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="bdate">Birthdate</label>
+                <input type="date" class="form-control" id="bdate" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="status">Status</label>
+                <select id="status" name="status" class="form-control">
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="widow">Widow/er</option>
+                  <option value="divorced">Divorced</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="">Gender</label>
+                <select id="gender" name="gender" class="form-control">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="spouse">Spouse's Name</label>
+                <input type="text" class="form-control" id="spouse" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="spouseOcc">Spouse Occupation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="spouseOcc"
+                />
+              </div>
+              <div class="form-group col-md-4">
+                <label>No. of Children</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="childNo"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="mother">Mother's Name</label>
+                <input type="text" class="form-control" id="mother" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="motherOcc">Occupation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="motherOcc"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="father">Father's Name</label>
+                <input type="text" class="form-control" id="father" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="fatherOcc">Occupation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fatherOcc"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="height">Height</label>
+                <input type="number" class="form-control" id="height" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="weight">Weight</label>
+                <input type="number" class="form-control" id="weight" />
+              </div>
+              <div class="form-group col-md-4">
+                <label>Religion</label>
+                <input type="text" class="form-control" id="religion" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-warning">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal for delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Modal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this customer?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-danger">YES</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app">
+      {% include './navbar.html'%}
+
+      <div class="bg-color--gray">
+        <div class="main-content container" data-router-view>
+            <div class="row mb-2">
+              <div class="col">
+                <p id="date_filter">
+                  <span id="date-label-from" class="date-label">From: </span><input class="date-range-filter" type="text" id="dfrom" name="dfrom" />
+                  <span id="date-label-to" class="date-label">To:<input class="date-range-filter " type="text" id="dto" name="dto" />
+              </p>
+              </div>
+              <div class="col header-form">
+                <div id="export"></div>
+                <a href="{% url 'customers:customer_registration' %}">
+                  <button type="submit" class="header-form__btn">Add Customer</button>
+                </a>
+              </div>
+            </div>
+            
+            {% comment %} <table id="datatable" class="table table-striped table-bordered table-curved"> {% endcomment %}
+            <table id="datatable" class="table">
+              <thead>
+                <tr>
+                  <th class="table-dark">First Name</th>
+                  <th class="table-dark">Last Name</th>
+                  <th class="table-dark">Birthdate</th>
+                  <th class="table-dark">City</th>
+                  <th class="table-dark">Date Registered</th>
+                  <th class="table-dark"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Johnny</td>
+                  <td>Deee</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/01/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Pedro</td>
+                  <td>Pinduku</td>
+                  <td>Jan 2,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/02/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Aster</td>
+                  <td>Asta</td>
+                  <td>Jan 3,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/03/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bob</td>
+                  <td>Builder</td>
+                  <td>Jan 4,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/04/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Carlo</td>
+                  <td>Cat</td>
+                  <td>Jan 5,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/05/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Delpine</td>
+                  <td>Doe</td>
+                  <td>Jan 6,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/10/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ester</td>
+                  <td>East</td>
+                  <td>Jan 7,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/12/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Fan</td>
+                  <td>Fan</td>
+                  <td>Jan 8,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/18/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Gary</td>
+                  <td>Gray</td>
+                  <td>Jan 9,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/29/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Heart</td>
+                  <td>Heal</td>
+                  <td>Jan 10,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/25/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Isko</td>
+                  <td>Isa</td>
+                  <td>Jan 11,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/15/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/13/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Kaloy</td>
+                  <td>Karl</td>
+                  <td>Jan 12,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/19/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Lotlot</td>
+                  <td>Lala</td>
+                  <td>Jan 13,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/20/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/09/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/18/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/30/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/28/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/31/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>Jan 1,2020</td>
+                  <td>Cebu City</td>
+                  <td>12/01/2020</td>
+                  <td>
+                    <button type="button" class="edit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+  </svg>
+                    </button>
+                    <button type="button" class="delete">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+  </svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <!--</main>-->
+      </div>
+      </div>
+
+    <!--bootstrapJS-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--datatable-->
+
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"
+    ></script>
+
+    <!--datepicker jquierui-->
+    <script
+      data-require="jqueryui@*"
+      data-semver="1.10.0"
+      src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"
+    ></script>
+    <script
+      src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.js"
+      data-semver="1.9.4"
+      data-require="datatables@*"
+    ></script>
+    <script>
+      // Date range filter
+      minDateFilter = '';
+      maxDateFilter = '';
+      $(document).ready(function () {
+        var table = $('#datatable').DataTable({
+          // dom: 'lftrip',
+          buttons: [
+            {
+              extend: 'excel',
+              text: '<i class="fa fa-files-o"></i> Export',
+              titleAttr: 'Excel',
+              className: 'btn',
+            },
+          ],
+        });
+
+        table.buttons().container().appendTo('#export');
+
+        table.on('click', '.edit', function () {
+          $('#editModal').modal('show');
+        });
+
+        table.on('click', '.delete', function () {
+          $('#deleteModal').modal('show');
+        });
+
+        $('#dfrom')
+          .datepicker({
+            // showOn: "button",
+            // buttonImage: "calendar.png",
+            // buttonImageOnly: false,
+            onSelect: function (date) {
+              minDateFilter = new Date(date).getTime();
+              table.fnDraw();
+            },
+          })
+          .keyup(function () {
+            minDateFilter = new Date(this.value).getTime();
+            table.fnDraw();
+          });
+
+        $('#dto')
+          .datepicker({
+            // showOn: "button",
+            // buttonImage: "calendar.png",
+            // buttonImageOnly: false,
+            onSelect: function (date) {
+              maxDateFilter = new Date(date).getTime();
+              table.fnDraw();
+            },
+          })
+          .keyup(function () {
+            maxDateFilter = new Date(this.value).getTime();
+            table.fnDraw();
+          });
+      });
+
+      $.fn.dataTableExt.afnFiltering.push(function (
+        oSettings,
+        aData,
+        iDataIndex
+      ) {
+        if (typeof aData._date == 'undefined') {
+          aData._date = new Date(aData[4]).getTime();
+        }
+
+        if (minDateFilter && !isNaN(minDateFilter)) {
+          if (aData._date < minDateFilter) {
+            return false;
+          }
+        }
+
+        if (maxDateFilter && !isNaN(maxDateFilter)) {
+          if (aData._date > maxDateFilter) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+    </script>
+{% endblock content %}
