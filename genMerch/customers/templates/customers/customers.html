@@ -16,6 +16,11 @@
       rel="stylesheet"
       href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
     />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+    <!--jqueryui for datepicker-->
+    <link data-require="jqueryui@*" data-semver="1.10.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
       defer
@@ -24,8 +29,199 @@
     <script src="{% static '/scripts/filterHandler.js' %}" defer></script>
   </head>
   <body>
+
+     <!-- Modal for view/edit -->
+     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="col-12">Name</label>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fName"
+                  placeholder="First Name"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mName"
+                  placeholder="Middle Name"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lName"
+                  placeholder="Last Name"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12">Address</label>
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="form-control my-2"
+                  id="address"
+                  placeholder="Street/Brgy/City"
+                />
+              </div>
+              <div class="col-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="province"
+                  placeholder="Province"
+                />
+              </div>
+              <div class="col-4">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="zip"
+                  placeholder="Zip"
+                />
+              </div>
+              <div class="col-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  placeholder="Country"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="bdate">Birthdate</label>
+                <input type="date" class="form-control" id="bdate" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="status">Status</label>
+                <select id="status" name="status" class="form-control">
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="widow">Widow/er</option>
+                  <option value="divorced">Divorced</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="">Gender</label>
+                <select id="gender" name="gender" class="form-control">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="spouse">Spouse's Name</label>
+                <input type="text" class="form-control" id="spouse" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="spouseOcc">Spouse Occupation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="spouseOcc"
+                />
+              </div>
+              <div class="form-group col-md-4">
+                <label>No. of Children</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="childNo"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="mother">Mother's Name</label>
+                <input type="text" class="form-control" id="mother" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="motherOcc">Occupation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="motherOcc"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="father">Father's Name</label>
+                <input type="text" class="form-control" id="father" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="fatherOcc">Occupation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fatherOcc"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="height">Height</label>
+                <input type="number" class="form-control" id="height" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="weight">Weight</label>
+                <input type="number" class="form-control" id="weight" />
+              </div>
+              <div class="form-group col-md-4">
+                <label>Religion</label>
+                <input type="text" class="form-control" id="religion" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-warning">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal for delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Modal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this customer?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-danger">YES</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="app">
-      <div class="topbar">
+      <div class="topbar" style="background-color:#d7dce1">
         <div class="container">
           <a href="./index.html"
             ><img src="{% static '/assets/images/logo.svg' %}" alt=""
@@ -34,7 +230,7 @@
             <a href="index" class="nav-item nav-item--selected" id="customers"
               >Customers</a
             >
-            <a href="./products.html" class="nav-item" id="products"
+            <a href="./products.html" class="nav-item" style="color: black;" id="products"
               >Products</a
             >
           </nav>
@@ -49,14 +245,18 @@
         </div>
       </div>
 
-      <main class="main-content" data-router-wrapper>
+     <!-- <main class="main-content" data-router-wrapper>-->
+      <div class="container" data-router-view>
         <form action="" method="POST" class="add">
           {% csrf_token %}
-          <a>
-            <button type="submit" class="add__btn">Add Customer</button>
-          </a>
+          <div class="col text-center my-2">
+            <a>
+              <button type="submit" class="btn btn-warning btn-lg">Add Customer</button>
+            </a>
+          </div>
+          
         </form>
-        <div class="container" data-router-view>
+        
           <!-- <div class="header">
             <div class="filter">
               <div class="main-container">
@@ -116,481 +316,371 @@
             </div>
             
           </div>-->
-          <table id="customer1" class="table table-striped table-bordered">
+          <div class="row">
+            <div class="col">
+              <p id="date_filter">
+                <span id="date-label-from" class="date-label">From: </span><input class="date-range-filter" type="text" id="dfrom" name="dfrom" />
+                <span id="date-label-to" class="date-label">To:<input class="date-range-filter " type="text" id="dto" name="dto" />
+            </p>
+            </div>
+            <div class="col">
+              <div id="exprt" style="float:right;"></div>
+
+            </div>
+          </div>
+          
+          <table id="datatable" class="table table-striped table-bordered table-curved">
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Birthdate</th>
-                <th>City</th>
-                <th>Date Registered</th>
+                <th class="table-primary">First Name</th>
+                <th class="table-success">Last Name</th>
+                <th class="table-danger">Birthdate</th>
+                <th class="table-warning">City</th>
+                <th class="table-dark">Date Registered</th>
+                <th class="table-info">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>John</td>
-                <td>Doe</td>
+                <td>Johnny</td>
+                <td>Deee</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/01/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pedro</td>
+                <td>Pinduku</td>
+                <td>Jan 2,2020</td>
+                <td>Cebu City</td>
+                <td>12/02/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Aster</td>
+                <td>Asta</td>
+                <td>Jan 3,2020</td>
+                <td>Cebu City</td>
+                <td>12/03/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Bob</td>
+                <td>Builder</td>
+                <td>Jan 4,2020</td>
+                <td>Cebu City</td>
+                <td>12/04/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Carlo</td>
+                <td>Cat</td>
+                <td>Jan 5,2020</td>
+                <td>Cebu City</td>
+                <td>12/05/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Delpine</td>
+                <td>Doe</td>
+                <td>Jan 6,2020</td>
+                <td>Cebu City</td>
+                <td>12/10/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Ester</td>
+                <td>East</td>
+                <td>Jan 7,2020</td>
+                <td>Cebu City</td>
+                <td>12/12/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Fan</td>
+                <td>Fan</td>
+                <td>Jan 8,2020</td>
+                <td>Cebu City</td>
+                <td>12/18/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Gary</td>
+                <td>Gray</td>
+                <td>Jan 9,2020</td>
+                <td>Cebu City</td>
+                <td>12/29/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Heart</td>
+                <td>Heal</td>
+                <td>Jan 10,2020</td>
+                <td>Cebu City</td>
+                <td>12/25/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Isko</td>
+                <td>Isa</td>
+                <td>Jan 11,2020</td>
+                <td>Cebu City</td>
+                <td>12/15/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
               <tr>
                 <td>John</td>
                 <td>Doe</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/13/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Kaloy</td>
+                <td>Karl</td>
+                <td>Jan 12,2020</td>
+                <td>Cebu City</td>
+                <td>12/19/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Lotlot</td>
+                <td>Lala</td>
+                <td>Jan 13,2020</td>
+                <td>Cebu City</td>
+                <td>12/20/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
               <tr>
                 <td>John</td>
                 <td>Doe</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/09/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
               <tr>
                 <td>John</td>
                 <td>Doe</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/18/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
               <tr>
                 <td>John</td>
                 <td>Doe</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/30/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
               <tr>
                 <td>John</td>
                 <td>Doe</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/28/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
               <tr>
                 <td>John</td>
                 <td>Doe</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/31/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
               <tr>
                 <td>John</td>
                 <td>Doe</td>
                 <td>Jan 1,2020</td>
                 <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
+                <td>12/01/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>Dec 1, 2020</td>
-              </tr>
-            </tbody>
 
-            <!--<div class="table-row table-header">
-              <div class="main-container customer-grid">
-                <h5 class="column-title first-name">First Name</h5>
-                <h5 class="column-title last-name">Last Name</h5>
-                <h5 class="column-title birthdate">Birthdate</h5>
-                <h5 class="column-title city">City</h5>
-                <h5 class="column-title date-registered">Date Registered</h5>
-              </div>
-            </div>
-            <div class="table">
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-              <div class="table-row">
-                <div class="main-container customer-grid">
-                  <span class="first-name">John</span>
-                  <span class="last-name">Doe</span>
-                  <span class="birthdate">Jan 1, 2020</span>
-                  <span class="city">Cebu City</span>
-                  <span class="date-registered">Dec 1, 2020</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>-->
+            </tbody>
+            
+            
           </table>
         </div>
-      </main>
+      <!--</main>-->
     </div>
     <!--bootstrapJS-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--datatable-->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+  <!--  <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>-->
+
+    <!--datepicker jquierui-->
+    <script data-require="jqueryui@*" data-semver="1.10.0" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.js" data-semver="1.9.4" data-require="datatables@*"></script>
     <script>
+      // Date range filter
+      minDateFilter = "";
+      maxDateFilter = "";
       $(document).ready(function () {
-        $("#customer1").DataTable();
+
+        var table = $("#datatable").DataTable({
+         // dom: 'lftrip',
+          buttons: [
+            {
+              extend: 'excel',
+              text: '<i class="fa fa-files-o"></i> Export',
+              titleAttr: 'Excel',
+              className: 'btn',
+            },
+   
+          ]
+        });
+
+        // $.fn.dataTable.Buttons( table, {
+        //   buttons: [
+        //     {
+        //       extend: 'excel',
+        //       text:      '<i class="fa fa-files-o"></i> Excel',
+        //       titleAttr: 'Excel',
+        //       className: 'btn btn-default btn-sm',
+        //       exportOptions: {
+        //           columns: ':visible'
+        //       }
+        //     }
+        //   ]
+        // });
+
+        table.buttons().container().appendTo('#exprt');
+
+
+        table.on('click','.edit',function(){
+          $('#editModal').modal('show');
+        });
+
+        table.on('click','.delete',function(){
+          $('#deleteModal').modal('show');
+        });
+
+
+        $("#dfrom").datepicker({
+          // showOn: "button",
+          // buttonImage: "calendar.png",
+          // buttonImageOnly: false,
+          "onSelect": function(date) {
+            minDateFilter = new Date(date).getTime();
+            table.fnDraw();
+          }
+        }).keyup(function() {
+          minDateFilter = new Date(this.value).getTime();
+          table.fnDraw();
+        });
+
+        $("#dto").datepicker({
+          // showOn: "button",
+          // buttonImage: "calendar.png",
+          // buttonImageOnly: false,
+          "onSelect": function(date) {
+            maxDateFilter = new Date(date).getTime();
+            table.fnDraw();
+          }
+        }).keyup(function() {
+          maxDateFilter = new Date(this.value).getTime();
+          table.fnDraw();
+        });
+
       });
+      
+
+      $.fn.dataTableExt.afnFiltering.push(
+        function(oSettings, aData, iDataIndex) {
+          if (typeof aData._date == 'undefined') {
+            aData._date = new Date(aData[4]).getTime();
+          }
+
+          if (minDateFilter && !isNaN(minDateFilter)) {
+            if (aData._date < minDateFilter) {
+              return false;
+            }
+          }
+
+          if (maxDateFilter && !isNaN(maxDateFilter)) {
+            if (aData._date > maxDateFilter) {
+              return false;
+            }
+          }
+
+          return true;
+        }
+      );
     </script>
   </body>
 </html>

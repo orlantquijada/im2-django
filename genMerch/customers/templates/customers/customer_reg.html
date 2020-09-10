@@ -24,13 +24,15 @@
       defer
     ></script>
     <script src="{% static '/scripts/index.js' %}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="{% static '/scripts/addScripts.js' %}"></script> -->
     <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
     <title>Customer Registration</title>
   </head>
 
   <body>
     <div class="app">
-      <div class="topbar">
+      <div class="topbar" style="background-color:#d7dce1">
         <div class="container">
           <a href="./index.html"
             ><img src="{% static '/assets/images/logo.svg' %}" alt=""
@@ -39,7 +41,7 @@
             <a href="index" class="nav-item nav-item--selected" id="customers"
               >Customers</a
             >
-            <a href="./products.html" class="nav-item" id="products"
+            <a href="./products.html" class="nav-item" style="color: black;" id="products"
               >Products</a
             >
           </nav>
@@ -163,7 +165,7 @@
                         <input
                           type="text"
                           class="form-control my-2"
-                          id="fName"
+                          id="address"
                           placeholder="Street/Brgy/City"
                         />
                       </div>
@@ -171,7 +173,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="lName"
+                          id="province"
                           placeholder="Province"
                         />
                       </div>
@@ -179,7 +181,7 @@
                         <input
                           type="number"
                           class="form-control"
-                          id="lName"
+                          id="zip"
                           placeholder="Zip"
                         />
                       </div>
@@ -187,7 +189,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="lName"
+                          id="country"
                           placeholder="Country"
                         />
                       </div>
@@ -300,59 +302,70 @@
                         <label for="elementary"><b>Elementary</b></label>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>School</label>
+                    <div class="container-fluid" id="elem">
+                      <div class="form-row" id="elemParent">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>School</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="elemSchool"
+                          />
+                        </div>
                       </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="elemSchool"
-                        />
+                      <div class="form-row">
+                        <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="elemGrade"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Year Completed</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="elemGraduated"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Awards</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <textarea
+                            class="form-control"
+                            id="elemAwards"
+                            rows="3"
+                          ></textarea>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="elemGrade"
-                        />
+                    
+                    <div class="row">
+                      <div class="col text-center">
+                        <button class="btn btn-primary btn-sm appendElem">ADD</button>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Year Completed</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="elemGraduated"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Awards</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <textarea
-                          class="form-control"
-                          id="elemSchool"
-                          rows="3"
-                        ></textarea>
-                      </div>
-                    </div>
+
                     <div class="form-row">
                       <div class="col">
-                        <label for="elementary"
+                        <label for="jhss"
                           ><b>Junior High School</b></label
                         >
                       </div>
                     </div>
+
+                    <div class="container-fluid" id="js">
                     <div class="form-row">
                       <div class="col-2">
                         &nbsp; &nbsp;<label>School</label>
@@ -394,190 +407,226 @@
                       <div class="col-10 mx-0">
                         <textarea
                           class="form-control"
-                          id="elemSchool"
+                          id="juniorAwards"
                           rows="3"
                         ></textarea>
                       </div>
                     </div>
+                  </div>
+                    <div class="row">
+                      <div class="col text-center">
+                        <button class="btn btn-primary btn-sm appendJS">ADD</button>
+                      </div>
+                    </div>
+
                     <div class="form-row">
                       <div class="col">
-                        <label for="elementary"
+                        <label for="shss"
                           ><b>Senior High School</b></label
                         >
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>School</label>
+                    <div class="container-fluid" id="shs">
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>School</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="seniorSchool"
+                          />
+                        </div>
                       </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="seniorSchool"
-                        />
+                      <div class="form-row">
+                        <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="seniorGrade"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Year Completed</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="seniorGraduated"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Strand</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input type="text" class="form-control" id="sstrand" />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Awards</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <textarea
+                            class="form-control"
+                            id="seniorAwards"
+                            rows="3"
+                          ></textarea>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="seniorGrade"
-                        />
+
+                    <div class="row">
+                      <div class="col text-center">
+                        <button class="btn btn-primary btn-sm appendSHS">ADD</button>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Year Completed</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="seniorGraduated"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Strand</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <input type="text" class="form-control" id="strand" />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Awards</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <textarea
-                          class="form-control"
-                          id="elemSchool"
-                          rows="3"
-                        ></textarea>
-                      </div>
-                    </div>
+
                     <div class="form-row">
                       <div class="col">
-                        <label for="elementary"><b>College</b></label>
+                        <label for="colege"><b>College</b></label>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>School</label>
+
+                    <div class="container-fluid" id="collge">
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>School</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="collgeSchool"
+                          />
+                        </div>
                       </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="seniorSchool"
-                        />
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Course</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="collegeCourse"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="collegeLevel"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Year Completed</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input type="number" class="form-control" id="collegeYear" />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Awards</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <textarea
+                            class="form-control"
+                            id="collegeAwards"
+                            rows="3"
+                          ></textarea>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Course</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="seniorGrade"
-                        />
+
+                    <div class="row">
+                      <div class="col text-center">
+                        <button class="btn btn-primary btn-sm appendCollege">ADD</button>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="seniorGraduated"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Year Completed</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <input type="number" class="form-control" id="strand" />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Awards</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <textarea
-                          class="form-control"
-                          id="elemSchool"
-                          rows="3"
-                        ></textarea>
-                      </div>
-                    </div>
+
                     <div class="form-row">
                       <div class="col">
                         <label for="elementary"><b>Post-Graduate</b></label>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>School</label>
+
+                    <div class="container-fluid" id="postgrad">
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>School</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="postGradSchool"
+                          />
+                        </div>
                       </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="seniorSchool"
-                        />
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Course</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="postGradCourse"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="postGradLevel"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Year Completed</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input type="number" class="form-control" id="postgradYear" />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Awards</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <textarea
+                            class="form-control"
+                            id="postGradAwards"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>  
+
+                    <div class="row">
+                      <div class="col text-center">
+                        <button class="btn btn-primary btn-sm appendPostGrad">ADD</button>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Course</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="seniorGrade"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="seniorGraduated"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Year Completed</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <input type="number" class="form-control" id="strand" />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Awards</label>
-                      </div>
-                      <div class="col-10 mx-0">
-                        <textarea
-                          class="form-control"
-                          id="elemSchool"
-                          rows="3"
-                        ></textarea>
-                      </div>
-                    </div>
+
                     <div class="form-row buttons mt-4">
                       <button
                         class="btn btn-primary previous"
@@ -605,42 +654,51 @@
                         <label for="elementary"><b>Trainings</b></label>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="col-2">&nbsp; &nbsp;<label>Title</label></div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="seniorSchool"
-                        />
+
+                    <div class="container-fluid" id="training">
+                      <div class="form-row">
+                        <div class="col-2">&nbsp; &nbsp;<label>Title</label></div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="trainingTitle"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">
-                        &nbsp; &nbsp;<label>Sponsor</label>
+                      <div class="form-row">
+                        <div class="col-2">
+                          &nbsp; &nbsp;<label>Sponsor</label>
+                        </div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="trainingSponsor"
+                          />
+                        </div>
                       </div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="seniorGrade"
-                        />
+                      <div class="form-row">
+                        <div class="col-2">&nbsp; &nbsp;<label>Date</label></div>
+                        <div class="col-10 mx-0">
+                          <input
+                            type="date"
+                            class="form-control"
+                            id="trainingDate"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">&nbsp; &nbsp;<label>Date</label></div>
-                      <div class="col-10 mx-0">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="seniorGraduated"
-                        />
+                      <div class="form-row">
+                        <div class="col-2">&nbsp; &nbsp;<label>Venue</label></div>
+                        <div class="col-10 mx-0">
+                          <input type="text" class="form-control" id="trainingVenue" />
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-2">&nbsp; &nbsp;<label>Venue</label></div>
-                      <div class="col-10 mx-0">
-                        <input type="text" class="form-control" id="strand" />
+                    </div>  
+
+                    <div class="row">
+                      <div class="col text-center">
+                        <button class="btn btn-primary btn-sm appendTraining">ADD</button>
                       </div>
                     </div>
 
@@ -666,6 +724,399 @@
     <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
     <script>
       const stepper1 = new Stepper(document.querySelector("#stepper1"));
+
+      $(document).ready(function(){
+        $(this).on("click",".appendElem", function(){
+          var elem1 =  '<div class="container-fluid" id="e">\
+                        <div class="form-row"> \
+                          <div class="col-2"> \
+                            &nbsp;&nbsp; <label>School</label></div>  \
+                            <div class="col-10 mx-0"> \
+                              <input type="text" class="form-control" id="elemSchool"/> \
+                              </div> </div> \
+                              <div class="form-row">\
+                        <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="number"\
+                            class="form-control"\
+                            id="elemGrade"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Year Completed</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="number"\
+                            class="form-control"\
+                            id="elemGraduated"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Awards</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <textarea\
+                            class="form-control"\
+                            id="elemSchool"\
+                            rows="3"\
+                          ></textarea>\
+                        </div>\
+                      </div>'
+            elem1 +='<div class="row">\
+                      <div class="col text-center">\
+                        <button class="btn btn-danger btn-sm removeElem">REMOVE</button>\
+                      </div>\
+                    </div>\
+                    </div>'
+          $("#elem").append(elem1);
+
+        });
+
+        $(this).on("click",".removeElem",function(){
+           var target = $(this).parent().parent().parent();
+               target.remove();
+        });
+        
+        $(this).on("click",".appendJS", function(){
+            var jhs = '<div class="container-fluid" id="js">\
+                    <div class="form-row">\
+                      <div class="col-2">\
+                        &nbsp; &nbsp;<label>School</label>\
+                      </div>\
+                      <div class="col-10 mx-0">\
+                        <input\
+                          type="text"\
+                          class="form-control"\
+                          id="juniorSchool"\
+                        />\
+                      </div>\
+                    </div>\
+                    <div class="form-row">\
+                      <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>\
+                      <div class="col-10 mx-0">\
+                        <input\
+                          type="number"\
+                          class="form-control"\
+                          id="juniorGrade"\
+                        />\
+                      </div>\
+                    </div>\
+                    <div class="form-row">\
+                      <div class="col-2">\
+                        &nbsp; &nbsp;<label>Year Completed</label>\
+                      </div>\
+                      <div class="col-10 mx-0">\
+                        <input\
+                          type="number"\
+                          class="form-control"\
+                          id="juniorGraduated"\
+                        />\
+                      </div>\
+                    </div>\
+                    <div class="form-row">\
+                      <div class="col-2">\
+                        &nbsp; &nbsp;<label>Awards</label>\
+                      </div>\
+                      <div class="col-10 mx-0">\
+                        <textarea\
+                          class="form-control"\
+                          id="elemSchool"\
+                          rows="3"\
+                        ></textarea>\
+                      </div>\
+                    </div>'
+              jhs +='<div class="row">\
+                      <div class="col text-center">\
+                        <button class="btn btn-danger btn-sm removeJS">REMOVE</button>\
+                      </div>\
+                    </div>\
+                    </div>'
+              $('#js').append(jhs);      
+        });
+
+        $(this).on("click",".removeJS", function(){
+          var target = $(this).parent().parent().parent();
+               target.remove();
+        });
+
+        $(this).on("click", '.appendSHS', function(){
+          var shs1 = '<div class="container-fluid" id="shs">\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>School</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="text"\
+                            class="form-control"\
+                            id="seniorSchool"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">&nbsp; &nbsp;<label>Grade</label></div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="number"\
+                            class="form-control"\
+                            id="seniorGrade"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Year Completed</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="number"\
+                            class="form-control"\
+                            id="seniorGraduated"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Strand</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input type="text" class="form-control" id="sstrand" />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Awards</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <textarea\
+                            class="form-control"\
+                            id="seniorAwards"\
+                            rows="3"\
+                          ></textarea>\
+                        </div>\
+                      </div>'
+                  shs1 += '<div class="row">\
+                            <div class="col text-center">\
+                              <button class="btn btn-danger btn-sm removeSHS">REMOVE</button>\
+                            </div>\
+                          </div>\
+                       </div>'
+                $('#shs').append(shs1);
+        });
+
+        $(this).on("click",".removeSHS", function(){
+          var target = $(this).parent().parent().parent();
+               target.remove();
+        });
+
+        $(this).on("click",".appendCollege", function(){
+            var col1 = '<div class="container-fluid" id="collge">\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>School</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="text"\
+                            class="form-control"\
+                            id="collegeSchool"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Course</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="text"\
+                            class="form-control"\
+                            id="collegeCourse"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="number"\
+                            class="form-control"\
+                            id="collegeLevel"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Year Completed</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input type="number" class="form-control" id="collegeYear" />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Awards</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <textarea\
+                            class="form-control"\
+                            id="collegeAwards"\
+                            rows="3"\
+                          ></textarea>\
+                        </div>\
+                      </div>'
+                col1 +='<div class="row">\
+                            <div class="col text-center">\
+                              <button class="btn btn-danger btn-sm removeCollege">REMOVE</button>\
+                            </div>\
+                          </div>\
+                       </div>'
+                $('#collge').append(col1);       
+        });
+
+        $(this).on("click",".removeCollege", function(){
+          var target = $(this).parent().parent().parent();
+               target.remove();
+        });
+
+        $(this).on("click",".appendPostGrad", function(){
+            var pgrad = '<div class="container-fluid" id="postgrad">\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>School</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="text"\
+                            class="form-control"\
+                            id="postGradSchool"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Course</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="text"\
+                            class="form-control"\
+                            id="postGradCourse"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">&nbsp; &nbsp;<label>Level</label></div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="number"\
+                            class="form-control"\
+                            id="postGradLevel"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Year Completed</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input type="number" class="form-control" id="postgradYear" />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Awards</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <textarea\
+                            class="form-control"\
+                            id="postGradAwards"\
+                            rows="3"\
+                          ></textarea>\
+                        </div>\
+                      </div>'
+                pgrad +='<div class="row">\
+                            <div class="col text-center">\
+                              <button class="btn btn-danger btn-sm removePostGrad">REMOVE</button>\
+                            </div>\
+                          </div>\
+                       </div>'
+                $('#postgrad').append(pgrad);       
+        });
+
+        $(this).on("click",".removePostGrad", function(){
+          var target = $(this).parent().parent().parent();
+               target.remove();
+        });
+
+        $(this).on("click",".appendTraining", function(){
+          var train ='<div class="container-fluid" id="training">\
+                      <div class="form-row">\
+                        <div class="col-2">&nbsp; &nbsp;<label>Title</label></div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="text"\
+                            class="form-control"\
+                            id="trainingTitle"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">\
+                          &nbsp; &nbsp;<label>Sponsor</label>\
+                        </div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="text"\
+                            class="form-control"\
+                            id="trainingSponsor"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">&nbsp; &nbsp;<label>Date</label></div>\
+                        <div class="col-10 mx-0">\
+                          <input\
+                            type="date"\
+                            class="form-control"\
+                            id="trainingDate"\
+                          />\
+                        </div>\
+                      </div>\
+                      <div class="form-row">\
+                        <div class="col-2">&nbsp; &nbsp;<label>Venue</label></div>\
+                        <div class="col-10 mx-0">\
+                          <input type="text" class="form-control" id="trainingVenue" />\
+                        </div>\
+                      </div>'
+              train += '<div class="row">\
+                            <div class="col text-center">\
+                              <button class="btn btn-danger btn-sm removeTraining">REMOVE</button>\
+                            </div>\
+                          </div>\
+                       </div>'
+             $('#training').append(train);   
+            
+        });
+
+        $(this).on("click",".removeTraining", function(){
+          var target = $(this).parent().parent().parent();
+               target.remove();
+        });
+
+                    
+
+      });
+
+
+
+      
     </script>
   </body>
 </html>
