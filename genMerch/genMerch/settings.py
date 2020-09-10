@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     # projcet apps
     'customers',
+    'products',
+    'main'
 ]
 
 MIDDLEWARE = [

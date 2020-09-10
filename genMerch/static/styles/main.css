@@ -23,6 +23,11 @@ body {
   font-size: 16px;
 }
 
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+
 .app {
   height: 100vh;
   width: 100%;
@@ -40,6 +45,104 @@ body {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+}
+
+.modal-content .modal-header {
+  background-color: #20123a;
+}
+
+.modal-content .modal-header h2 {
+  font-size: 1rem !important;
+}
+
+.modal-content .modal-header h2,
+.modal-content .modal-header button,
+.modal-content .modal-header span {
+  color: white;
+}
+
+.modal-content .modal-body {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal-content .modal-body .title {
+  margin: 1rem 0;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+}
+
+.modal-content .modal-body strong {
+  color: #007bff !important;
+}
+
+.modal-content .modal-body .ours {
+  margin-top: 2rem;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'pur pos' 'per per';
+  row-gap: 2rem;
+  -webkit-column-gap: 4rem;
+          column-gap: 4rem;
+}
+
+.modal-content .modal-body .ours div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal-content .modal-body .ours div h5 {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.modal-content .modal-body .ours div p {
+  text-align: center;
+}
+
+.modal-content .modal-body .ours .per {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: per;
+  padding: 0 10rem;
+}
+
+.modal-content .modal-body .ours .pos {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: pos;
+}
+
+.modal-content .modal-body .ours .pur {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: pur;
 }
 
 #test-l-1 .buttons,
@@ -74,7 +177,7 @@ body {
 }
 
 .main-content {
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 6rem;
 }
 
@@ -138,7 +241,7 @@ body {
   background-color: white;
 }
 
-.main-content .table thead tr th:hover {
+.main-content .table thead tr th:hover:not(:last-child) {
   -webkit-filter: brightness(95%);
           filter: brightness(95%);
 }
@@ -151,24 +254,31 @@ body {
 .main-content .table thead tr th:last-child {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
+  cursor: default;
+}
+
+.main-content .table thead tr th:last-child::before, .main-content .table thead tr th:last-child::after {
+  content: none;
 }
 
 .main-content .table tbody tr td:last-child button {
-  border: none;
+  border: 1px solid black;
   background-color: transparent;
   cursor: pointer;
+  padding: 0 0.5rem;
+  border-radius: 6px;
 }
 
 .main-content .table tbody tr td:last-child button:first-child {
   margin-right: 1rem;
 }
 
-.main-content .table tbody tr td:last-child button:first-child:hover svg path {
-  fill: #007bff;
+.main-content .table tbody tr td:last-child button:first-child:hover {
+  background-color: #ffb885;
 }
 
-.main-content .table tbody tr td:last-child button:last-child:hover svg path {
-  fill: #ff3a29;
+.main-content .table tbody tr td:last-child button:last-child:hover {
+  background-color: #ff8585;
 }
 
 .main-content .table tbody .odd:nth-child(even),

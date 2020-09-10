@@ -31,7 +31,7 @@
 
 {% block content %}
     <div class="app">
-      {% include './navbar.html'%}
+      {% include './navbar.html' with is_customer=is_customer %}
 
       <main class="bg-color--gray">
         <div class="container flex-grow-1 flex-shrink-0 py-5">
@@ -257,6 +257,21 @@
                         <label>Religion</label>
                         <input type="text" class="form-control" id="religion" />
                       </div>
+                    </div>
+                    <div class="row">
+                      <div class="col"></div>
+                      <div class="col">
+                        <img id="img" src="#" alt="">
+                        <div class="row">
+                          <div class="col text-center">
+                            <label>Profile Picture</label>
+                            <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" />
+                          </div>
+                         
+                        </div>
+                        
+                      </div>
+                      <div class="col"></div>
                     </div>
 
                     <div class="form-row buttons mt-4">
@@ -1138,6 +1153,22 @@
           target.remove();
         });
       });
+
+      function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+              //  alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img')
+                        .attr('src', e.target.result)
+                        .width(300)
+                        .height(300);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
 {% endblock content %}

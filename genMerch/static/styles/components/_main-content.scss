@@ -1,5 +1,5 @@
 .main-content {
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 6rem;
 
   .header-form {
@@ -50,7 +50,7 @@
         color: $h-black;
         background-color: white;
 
-        &:hover {
+        &:hover:not(:last-child) {
           filter: brightness(95%);
         }
 
@@ -62,6 +62,12 @@
         &:last-child {
           border-top-right-radius: $default-radius;
           border-bottom-right-radius: $default-radius;
+          cursor: default;
+        }
+
+        &:last-child::before,
+        &:last-child::after {
+          content: none;
         }
       }
     }
@@ -70,26 +76,24 @@
       // table body last column
       tr td:last-child {
         button {
-          border: none;
+          border: 1px solid black;
           background-color: transparent;
           cursor: pointer;
+          padding: 0 0.5rem;
+          border-radius: $default-radius;
 
-          // edit
+          // view
           &:first-child {
             margin-right: 1rem;
 
             &:hover {
-              svg path {
-                fill: $primary-blue;
-              }
+              background-color: #ffb885;
             }
           }
 
-          // trashcan
+          // delete
           &:last-child:hover {
-            svg path {
-              fill: #ff3a29;
-            }
+            background-color: #ff8585;
           }
         }
       }
