@@ -4,9 +4,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Customers</title>
+    <title>Products</title>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+      defer
+    ></script>
+    <script src="{% static '/scripts/index.js' %}" defer></script>
+    <script src="{% static '/scripts/filterHandler.js' %}" defer></script>
+
+
     <!--datatable css-->
     <link
       rel="stylesheet"
@@ -21,17 +29,12 @@
     <link data-require="jqueryui@*" data-semver="1.10.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
-      defer
-    ></script>
-    <script src="{% static '/scripts/index.js' %}" defer></script>
-    <script src="{% static '/scripts/filterHandler.js' %}" defer></script>
+
   </head>
   <body>
 
-     <!-- Modal for view/edit -->
-     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal for view/edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -41,154 +44,136 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="form-group row">
-              <label class="col-12">Name</label>
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fName"
-                  placeholder="First Name"
-                />
+            <form id="prodReg">
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Date Registered</label>
+                </div>
+                <div class="col-6">
+                  <input type="date" class="form-control" id="prodDateReg" />
+                </div>
+                <div class="col-3"></div>
               </div>
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="mName"
-                  placeholder="Middle Name"
-                />
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>SKU</label>
+                </div>
+                <div class="col-6">
+                  <input type="number" class="form-control" id="sku" />
+                </div>
+                <div class="col-3"></div>
               </div>
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="lName"
-                  placeholder="Last Name"
-                />
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Category</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="category" />
+                </div>
+                <div class="col-3"></div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-12">Address</label>
-              <div class="col-12">
-                <input
-                  type="text"
-                  class="form-control my-2"
-                  id="address"
-                  placeholder="Street/Brgy/City"
-                />
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Name</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="prodName" />
+                </div>
+                <div class="col-3"></div>
               </div>
-              <div class="col-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="province"
-                  placeholder="Province"
-                />
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Brand</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="prodbrand" />
+                </div>
+                <div class="col-3"></div>
               </div>
-              <div class="col-4">
-                <input
-                  type="number"
-                  class="form-control"
-                  id="zip"
-                  placeholder="Zip"
-                />
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Color</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="prodcolor" />
+                </div>
+                <div class="col-3"></div>
               </div>
-              <div class="col-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="country"
-                  placeholder="Country"
-                />
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Size/Dimension</label>
+                </div>
+                <div class="col-6">
+                  <input type="number" class="form-control" id="prodsize" />
+                </div>
+                <div class="col-3"></div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="bdate">Birthdate</label>
-                <input type="date" class="form-control" id="bdate" />
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Price</label>
+                </div>
+                <div class="col-6">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="prodPrice"
+                    placeholder="Php"
+                  />
+                </div>
+                <div class="col-3"></div>
               </div>
-              <div class="form-group col-md-4">
-                <label for="status">Status</label>
-                <select id="status" name="status" class="form-control">
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="widow">Widow/er</option>
-                  <option value="divorced">Divorced</option>
-                </select>
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>No. of Stocks</label>
+                </div>
+                <div class="col-6">
+                  <input type="number" class="form-control" id="prodStocks" />
+                </div>
+                <div class="col-3"></div>
               </div>
-              <div class="form-group col-md-4">
-                <label class="">Gender</label>
-                <select id="gender" name="gender" class="form-control">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
+              <div class="form-row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                  <label>Images</label>
+                </div>
+                <div class="col-6"></div>
+                <div class="col-3"></div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="spouse">Spouse's Name</label>
-                <input type="text" class="form-control" id="spouse" />
+              <div class="form-row">
+                <div class="col-2"></div>
+                <div class="col-2 square">
+                  <br /><br />
+                  <img id="img" src="#" alt="">
+                  <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" />
+                  
+                </div>
+                <div class="col-1"></div>
+                <div class="col-2 square">
+                  <br /><br />
+                  <img id="img1" src="#" alt="">
+                  <input type="file" onchange="readURL2(this);" class="form-control" id="prodimg2" />
+                  
+                </div>
+                <div class="col-1"></div>
+                <div class="col-2 square">
+                  <br /><br />
+                  <img id="img2" src="#" alt="">
+                  <input type="file" onchange="readURL3(this);" class="form-control" id="prodimg3" />
+                  
+                </div>
+                <div class="col-2"></div>
               </div>
-              <div class="form-group col-md-4">
-                <label for="spouseOcc">Spouse Occupation</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="spouseOcc"
-                />
-              </div>
-              <div class="form-group col-md-4">
-                <label>No. of Children</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="childNo"
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="mother">Mother's Name</label>
-                <input type="text" class="form-control" id="mother" />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="motherOcc">Occupation</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="motherOcc"
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="father">Father's Name</label>
-                <input type="text" class="form-control" id="father" />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="fatherOcc">Occupation</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fatherOcc"
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="height">Height</label>
-                <input type="number" class="form-control" id="height" />
-              </div>
-              <div class="form-group col-md-4">
-                <label for="weight">Weight</label>
-                <input type="number" class="form-control" id="weight" />
-              </div>
-              <div class="form-group col-md-4">
-                <label>Religion</label>
-                <input type="text" class="form-control" id="religion" />
-              </div>
-            </div>
+              
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -220,6 +205,7 @@
       </div>
     </div>
 
+    <!--NavBar-->
     <div class="app">
       <div class="topbar" style="background-color:#d7dce1">
         <div class="container">
@@ -227,10 +213,13 @@
             ><img src="{% static '/assets/images/logo.svg' %}" alt=""
           /></a>
           <nav class="navigation">
-            <a href="index" class="nav-item nav-item--selected" id="customers"
+            <a href="./customers.html" class="nav-item" style="color: black;" id="customers"
               >Customers</a
             >
-            <a href="./products.html" class="nav-item" style="color: black;" id="products"
+            <a
+              href="./products.html"
+              class="nav-item nav-item--selected"
+              id="products"
               >Products</a
             >
           </nav>
@@ -244,78 +233,21 @@
           </div>
         </div>
       </div>
+      <!-- <main class="main-content" data-router-wrapper> -->
 
-     <!-- <main class="main-content" data-router-wrapper>-->
-      <div class="container" data-router-view>
+        <div class="container" data-router-view>
           <form action="" method="POST" class="add">
             {% csrf_token %}
             <div class="col text-center my-2">
               <a>
-                <button type="submit" class="btn btn-warning btn-lg">Add Customer</button>
+                <button type="submit" class="btn btn-warning btn-lg">Add Product</button>
               </a>
             </div>
-          
-          </form>
-        
-          <!-- <div class="header">
-            <div class="filter">
-              <div class="main-container">
-                <div class="title">
-                  <img
-                    src="{% static '/assets/images/funnel.svg' %}"
-                    alt=""
-                    class="title__icon"
-                  />
-                  <h5 class="title__text">Filter by:</h5>
-                </div>
-                <div class="filter-choices">
-                  <div class="filter-option-container">
-                    <button class="filter-option orange">First Name</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="text" placeholder="First Name" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option blue">Last Name</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="text" placeholder="Last Name" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option violet">Birthdate</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="date" name="" id="" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option green">City</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="text" placeholder="City" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option yellow">
-                      Date Registered
-                    </button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="date" name="" id="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="filter-option filter-keyword orange">
-                  John
-                  <div class="icon-container">
-                    <img
-                      src="{% static '/assets/images/close.svg' %}"
-                      alt=""
-                      class="close-icon"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
             
-          </div>-->
+          </form>
+
+        
+          <!--DateFIlter-->
           <div class="row">
             <div class="col">
               <p id="date_filter">
@@ -324,28 +256,65 @@
             </p>
             </div>
             <div class="col">
-              <div id="exprt" style="float:right;"></div>
-
+              <div id="exprt" style="float:right;"></div> <!--Export to excel file-->
             </div>
           </div>
-          
+
           <table id="datatable" class="table table-striped table-bordered table-curved">
             <thead>
               <tr>
-                <th class="table-primary">First Name</th>
-                <th class="table-success">Last Name</th>
-                <th class="table-danger">Birthdate</th>
-                <th class="table-warning">City</th>
-                <th class="table-dark">Date Registered</th>
+                <th class="table-primary">Name</th>
+                <th class="table-success">Brand</th>
+                <th class="table-danger">Price</th>
+                <th class="table-warning">No. of Items</th>
+                <th class="table-dark">Category</th>
+                <th class="table-light">Date Registered</th>
                 <th class="table-info">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Johnny</td>
-                <td>Deee</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>01/01/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Cellphone</td>
+                <td>SamSung</td>
+                <td>20 000.00</td>
+                <td>2 pcs</td>
+                <td>Gadgets</td>
+                <td>02/14/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Laptop</td>
+                <td>Acer</td>
+                <td>50 000.00</td>
+                <td>1 pcs</td>
+                <td>Gadgets</td>
+                <td>03/04/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
                 <td>12/01/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
@@ -353,65 +322,155 @@
                 </td>
               </tr>
               <tr>
-                <td>Pedro</td>
-                <td>Pinduku</td>
-                <td>Jan 2,2020</td>
-                <td>Cebu City</td>
-                <td>12/02/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>09/01/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Aster</td>
-                <td>Asta</td>
-                <td>Jan 3,2020</td>
-                <td>Cebu City</td>
-                <td>12/03/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>09/01/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Bob</td>
-                <td>Builder</td>
-                <td>Jan 4,2020</td>
-                <td>Cebu City</td>
-                <td>12/04/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>11/11/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Carlo</td>
-                <td>Cat</td>
-                <td>Jan 5,2020</td>
-                <td>Cebu City</td>
-                <td>12/05/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>09/09/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Delpine</td>
-                <td>Doe</td>
-                <td>Jan 6,2020</td>
-                <td>Cebu City</td>
-                <td>12/10/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>10/20/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Ester</td>
-                <td>East</td>
-                <td>Jan 7,2020</td>
-                <td>Cebu City</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>06/08/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>06/01/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>06/09/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>06/11/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>08/01/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>07/01/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>11/01/2020</td>
+                <td>
+                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
                 <td>12/12/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
@@ -419,173 +478,75 @@
                 </td>
               </tr>
               <tr>
-                <td>Fan</td>
-                <td>Fan</td>
-                <td>Jan 8,2020</td>
-                <td>Cebu City</td>
-                <td>12/18/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>11/01/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Gary</td>
-                <td>Gray</td>
-                <td>Jan 9,2020</td>
-                <td>Cebu City</td>
-                <td>12/29/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>10/01/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Heart</td>
-                <td>Heal</td>
-                <td>Jan 10,2020</td>
-                <td>Cebu City</td>
-                <td>12/25/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>07/07/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
               <tr>
-                <td>Isko</td>
-                <td>Isa</td>
-                <td>Jan 11,2020</td>
-                <td>Cebu City</td>
-                <td>12/15/2020</td>
+                <td>Pencil</td>
+                <td>Monggol</td>
+                <td>7.50</td>
+                <td>100 pcs</td>
+                <td>School Supplies</td>
+                <td>01/01/2020</td>
                 <td>
                   <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
                   <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
                 </td>
               </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>12/13/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>Kaloy</td>
-                <td>Karl</td>
-                <td>Jan 12,2020</td>
-                <td>Cebu City</td>
-                <td>12/19/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>Lotlot</td>
-                <td>Lala</td>
-                <td>Jan 13,2020</td>
-                <td>Cebu City</td>
-                <td>12/20/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>12/09/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>12/18/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>12/30/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>12/28/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>12/31/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Jan 1,2020</td>
-                <td>Cebu City</td>
-                <td>12/01/2020</td>
-                <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
-                </td>
-              </tr>
-
             </tbody>
-            
-            
           </table>
         </div>
-      <!--</main>-->
     </div>
+
     <!--bootstrapJS-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!--datatable-->
     
+    <!--datatable-->
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-  <!--  <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>-->
 
     <!--datepicker jquierui-->
     <script data-require="jqueryui@*" data-semver="1.10.0" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.js" data-semver="1.9.4" data-require="datatables@*"></script>
+    <!-- <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script> -->
     <script>
       // Date range filter
       minDateFilter = "";
@@ -593,7 +554,6 @@
       $(document).ready(function () {
 
         var table = $("#datatable").DataTable({
-         // dom: 'lftrip',
           buttons: [
             {
               extend: 'excel',
@@ -604,20 +564,6 @@
    
           ]
         });
-
-        // $.fn.dataTable.Buttons( table, {
-        //   buttons: [
-        //     {
-        //       extend: 'excel',
-        //       text:      '<i class="fa fa-files-o"></i> Excel',
-        //       titleAttr: 'Excel',
-        //       className: 'btn btn-default btn-sm',
-        //       exportOptions: {
-        //           columns: ':visible'
-        //       }
-        //     }
-        //   ]
-        // });
 
         table.buttons().container().appendTo('#exprt');
 
@@ -632,9 +578,6 @@
 
 
         $("#dfrom").datepicker({
-          // showOn: "button",
-          // buttonImage: "calendar.png",
-          // buttonImageOnly: false,
           "onSelect": function(date) {
             minDateFilter = new Date(date).getTime();
             table.fnDraw();
@@ -645,9 +588,6 @@
         });
 
         $("#dto").datepicker({
-          // showOn: "button",
-          // buttonImage: "calendar.png",
-          // buttonImageOnly: false,
           "onSelect": function(date) {
             maxDateFilter = new Date(date).getTime();
             table.fnDraw();
@@ -663,7 +603,7 @@
       $.fn.dataTableExt.afnFiltering.push(
         function(oSettings, aData, iDataIndex) {
           if (typeof aData._date == 'undefined') {
-            aData._date = new Date(aData[4]).getTime();
+            aData._date = new Date(aData[5]).getTime();
           }
 
           if (minDateFilter && !isNaN(minDateFilter)) {
@@ -681,6 +621,56 @@
           return true;
         }
       );
+
+      function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+              //  alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img')
+                        .attr('src', e.target.result)
+                        .width(160)
+                        .height(160);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+               // alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img1')
+                        .attr('src', e.target.result)
+                        .width(160)
+                        .height(160);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+               // alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img2')
+                        .attr('src', e.target.result)
+                        .width(160)
+                        .height(160);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
+
+
   </body>
 </html>
