@@ -6,7 +6,6 @@
     <meta charset="utf-8" />
     <title>Customers</title>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
     <!--datatable css-->
     <link
       rel="stylesheet"
@@ -27,6 +26,7 @@
     ></script>
     <script src="{% static '/scripts/index.js' %}" defer></script>
     <script src="{% static '/scripts/filterHandler.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
   </head>
   <body>
 
@@ -221,7 +221,7 @@
     </div>
 
     <div class="app">
-      <div class="topbar" style="background-color:#d7dce1">
+      <div class="topbar">
         <div class="container">
           <a href="./index.html"
             ><img src="{% static '/assets/images/logo.svg' %}" alt=""
@@ -230,7 +230,7 @@
             <a href="index" class="nav-item nav-item--selected" id="customers"
               >Customers</a
             >
-            <a href="./products.html" class="nav-item" style="color: black;" id="products"
+            <a href="./products.html" class="nav-item" id="products"
               >Products</a
             >
           </nav>
@@ -245,99 +245,33 @@
         </div>
       </div>
 
-     <!-- <main class="main-content" data-router-wrapper>-->
-      <div class="container" data-router-view>
-        <form action="" method="POST" class="add">
-          {% csrf_token %}
-          <div class="col text-center my-2">
-            <a>
-              <button type="submit" class="btn btn-warning btn-lg">Add Customer</button>
-            </a>
-          </div>
-          
-        </form>
-        
-          <!-- <div class="header">
-            <div class="filter">
-              <div class="main-container">
-                <div class="title">
-                  <img
-                    src="{% static '/assets/images/funnel.svg' %}"
-                    alt=""
-                    class="title__icon"
-                  />
-                  <h5 class="title__text">Filter by:</h5>
-                </div>
-                <div class="filter-choices">
-                  <div class="filter-option-container">
-                    <button class="filter-option orange">First Name</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="text" placeholder="First Name" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option blue">Last Name</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="text" placeholder="Last Name" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option violet">Birthdate</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="date" name="" id="" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option green">City</button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="text" placeholder="City" />
-                    </div>
-                  </div>
-                  <div class="filter-option-container">
-                    <button class="filter-option yellow">
-                      Date Registered
-                    </button>
-                    <div class="filter-search filter-search--hide">
-                      <input type="date" name="" id="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="filter-option filter-keyword orange">
-                  John
-                  <div class="icon-container">
-                    <img
-                      src="{% static '/assets/images/close.svg' %}"
-                      alt=""
-                      class="close-icon"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>-->
-          <div class="row">
+      <div class="main-content container" data-router-view>
+          <div class="row mb-2">
             <div class="col">
               <p id="date_filter">
                 <span id="date-label-from" class="date-label">From: </span><input class="date-range-filter" type="text" id="dfrom" name="dfrom" />
                 <span id="date-label-to" class="date-label">To:<input class="date-range-filter " type="text" id="dto" name="dto" />
             </p>
             </div>
-            <div class="col">
-              <div id="exprt" style="float:right;"></div>
-
+            <div class="col header-form">
+              <div id="export"></div>
+              <form action="" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="header-form__btn">Add Customer</button>
+              </form>
             </div>
           </div>
           
-          <table id="datatable" class="table table-striped table-bordered table-curved">
+          {% comment %} <table id="datatable" class="table table-striped table-bordered table-curved"> {% endcomment %}
+          <table id="datatable" class="table">
             <thead>
               <tr>
-                <th class="table-primary">First Name</th>
-                <th class="table-success">Last Name</th>
-                <th class="table-danger">Birthdate</th>
-                <th class="table-warning">City</th>
+                <th class="table-dark">First Name</th>
+                <th class="table-dark">Last Name</th>
+                <th class="table-dark">Birthdate</th>
+                <th class="table-dark">City</th>
                 <th class="table-dark">Date Registered</th>
-                <th class="table-info">Actions</th>
+                <th class="table-dark"></th>
               </tr>
             </thead>
             <tbody>
@@ -348,8 +282,16 @@
                 <td>Cebu City</td>
                 <td>12/01/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -359,8 +301,16 @@
                 <td>Cebu City</td>
                 <td>12/02/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -370,8 +320,16 @@
                 <td>Cebu City</td>
                 <td>12/03/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -381,8 +339,16 @@
                 <td>Cebu City</td>
                 <td>12/04/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -392,8 +358,16 @@
                 <td>Cebu City</td>
                 <td>12/05/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -403,8 +377,16 @@
                 <td>Cebu City</td>
                 <td>12/10/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -414,8 +396,16 @@
                 <td>Cebu City</td>
                 <td>12/12/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -425,8 +415,16 @@
                 <td>Cebu City</td>
                 <td>12/18/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -436,8 +434,16 @@
                 <td>Cebu City</td>
                 <td>12/29/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -447,8 +453,16 @@
                 <td>Cebu City</td>
                 <td>12/25/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -458,8 +472,16 @@
                 <td>Cebu City</td>
                 <td>12/15/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -469,8 +491,16 @@
                 <td>Cebu City</td>
                 <td>12/13/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -480,8 +510,16 @@
                 <td>Cebu City</td>
                 <td>12/19/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -491,8 +529,16 @@
                 <td>Cebu City</td>
                 <td>12/20/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -502,8 +548,16 @@
                 <td>Cebu City</td>
                 <td>12/09/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -513,8 +567,16 @@
                 <td>Cebu City</td>
                 <td>12/18/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -524,8 +586,16 @@
                 <td>Cebu City</td>
                 <td>12/30/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -535,8 +605,16 @@
                 <td>Cebu City</td>
                 <td>12/28/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -546,8 +624,16 @@
                 <td>Cebu City</td>
                 <td>12/31/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -557,8 +643,16 @@
                 <td>Cebu City</td>
                 <td>12/01/2020</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit"><i class="far fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger delete"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="edit">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.0186 10.6787L13.3236 7.98371L15.2716 6.03471L17.9656 8.72871L16.0186 10.6787ZM9.07959 17.6247L6.10259 17.8957L6.36659 14.9397L11.9836 9.32271L14.6796 12.0187L9.07959 17.6247ZM19.4036 7.33771L19.4026 7.33671L16.6646 4.59871C15.9236 3.85971 14.6506 3.82471 13.9486 4.52971L4.95259 13.5257C4.62659 13.8507 4.42459 14.2827 4.38259 14.7397L4.00359 18.9097C3.97759 19.2047 4.08259 19.4967 4.29259 19.7067C4.48159 19.8957 4.73659 19.9997 4.99959 19.9997C5.03059 19.9997 5.06059 19.9987 5.09059 19.9957L9.26059 19.6167C9.71859 19.5747 10.1496 19.3737 10.4746 19.0487L19.4716 10.0517C20.1996 9.32171 20.1686 8.10371 19.4036 7.33771V7.33771Z" fill="black"/>
+</svg>
+                  </button>
+                  <button type="button" class="delete">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 16C10 16.55 9.55 17 9 17C8.45 17 8 16.55 8 16V12C8 11.45 8.45 11 9 11C9.55 11 10 11.45 10 12V16ZM16 16C16 16.55 15.55 17 15 17C14.45 17 14 16.55 14 16V12C14 11.45 14.45 11 15 11C15.55 11 16 11.45 16 12V16ZM18 19C18 19.551 17.552 20 17 20H7C6.448 20 6 19.551 6 19V8H18V19ZM10 4.328C10 4.173 10.214 4 10.5 4H13.5C13.786 4 14 4.173 14 4.328V6H10V4.328ZM21 6H20H16V4.328C16 3.044 14.879 2 13.5 2H10.5C9.121 2 8 3.044 8 4.328V6H4H3C2.45 6 2 6.45 2 7C2 7.55 2.45 8 3 8H4V19C4 20.654 5.346 22 7 22H17C18.654 22 20 20.654 20 19V8H21C21.55 8 22 7.55 22 7C22 6.45 21.55 6 21 6V6Z" fill="#20123a"/>
+</svg>
+                  </button>
                 </td>
               </tr>
 
@@ -619,7 +713,7 @@
         //   ]
         // });
 
-        table.buttons().container().appendTo('#exprt');
+        table.buttons().container().appendTo('#export');
 
 
         table.on('click','.edit',function(){
@@ -656,7 +750,6 @@
           maxDateFilter = new Date(this.value).getTime();
           table.fnDraw();
         });
-
       });
       
 
