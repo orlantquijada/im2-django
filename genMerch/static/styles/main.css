@@ -47,6 +47,104 @@ body {
           flex-grow: 1;
 }
 
+.modal-content .modal-header {
+  background-color: #20123a;
+}
+
+.modal-content .modal-header h2 {
+  font-size: 1rem !important;
+}
+
+.modal-content .modal-header h2,
+.modal-content .modal-header button,
+.modal-content .modal-header span {
+  color: white;
+}
+
+.modal-content .modal-body {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal-content .modal-body .title {
+  margin: 1rem 0;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+}
+
+.modal-content .modal-body strong {
+  color: #007bff !important;
+}
+
+.modal-content .modal-body .ours {
+  margin-top: 2rem;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'pur pos' 'per per';
+  row-gap: 2rem;
+  -webkit-column-gap: 4rem;
+          column-gap: 4rem;
+}
+
+.modal-content .modal-body .ours div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal-content .modal-body .ours div h5 {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.modal-content .modal-body .ours div p {
+  text-align: center;
+}
+
+.modal-content .modal-body .ours .per {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: per;
+  padding: 0 10rem;
+}
+
+.modal-content .modal-body .ours .pos {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: pos;
+}
+
+.modal-content .modal-body .ours .pur {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: pur;
+}
+
 #test-l-1 .buttons,
 #test-l-2 .buttons,
 #test-l-3 .buttons {
