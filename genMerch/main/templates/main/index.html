@@ -8,7 +8,119 @@
     <title>Home</title>
 
     <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
+
+  <!-- Modal for about -->
+  <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title w-100 text-center" id="exampleModalLabel">About Us</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu nunc erat. In eu egestas risus. Nulla at dolor eget tellus 
+            dictum vehicula ut scelerisque ex. Curabitur accumsan sem ut velit sodales placerat. Praesent pharetra efficitur ex et tempor. 
+            Mauris at vehicula diam. In molestie nec enim sed volutpat. Aenean id nulla vulputate, placerat nisi vel, fermentum ligula.
+            Aenean et turpis sit amet est hendrerit ornare. Cras in justo mattis, gravida massa nec, mollis felis. Aliquam scelerisque 
+            mauris a ligula porta, a fermentum arcu ultrices. Fusce mollis pellentesque pulvinar. Sed ornare nibh vitae dapibus fringilla. 
+            Proin vehicula turpis quis fringilla rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut nunc auctor, 
+            pretium nunc mattis, convallis justo. Cras ullamcorper, odio sit amet finibus vulputate, dui nisl scelerisque orci, et efficitur 
+            nisi nisl at magna. In aliquet sed ex sit amet aliquam. Sed viverra rhoncus eleifend.
+          </p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for contact -->
+  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title w-100 text-center">Contact Us</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+            a matter of hours to help you.</p>
+            <div class="row">
+              <div class="col-md-9 mb-md-0 mb-5">
+                  <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="md-form mb-0">
+                                  <label for="name" class="">Your name</label>
+                                  <input type="text" id="name" name="name" class="form-control">           
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="md-form mb-0">
+                                  <label for="email" class="">Your email</label>
+                                  <input type="text" id="email" name="email" class="form-control">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="md-form mb-0">
+                                  <label for="subject" class="">Subject</label>
+                                  <input type="text" id="subject" name="subject" class="form-control">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="md-form">
+                                <label for="message">Your message</label>
+                                  <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+                  <div class="status"></div>
+              </div>
+              <div class="col-md-3 text-center">
+                  <ul class="list-unstyled mb-0">
+                      <li><i class="fa fa-map-marker fa-2x"></i>
+                          <p>CIT-U, N. Bacalso, Cebu City</p>
+                      </li>
+      
+                      <li><i class="fa fa-phone mt-1 fa-2x"></i>
+                          <p>+ 01 234 567 89</p>
+                      </li>
+      
+                      <li><i class="fa fa-envelope mt-1 fa-2x"></i>
+                          <p>contact@firefox.co</p>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <body>
     <div class="topbar">
@@ -17,8 +129,8 @@
           ><img src="{% static '/assets/images/logo.svg' %}" alt=""
         /></a>
         <div class="nav">
-          <a href="#" class="nav-item">About</a>
-          <a href="#" class="nav-item">Services</a>
+          <a href="#" class="nav-item about">About</a>
+          <a href="#" class="nav-item contact">Contact</a> 
           <a href="#" class="nav-item">Products</a>
           <a href="#" class="nav-item">Pricing</a>
         </div>
@@ -61,5 +173,15 @@
         </div>
       </div>
     </main>
+     
+    <script>
+      $('.about').on("click",function(){
+        $('#aboutModal').modal('toggle');
+      });
+
+      $('.contact').on("click",function(){
+        $('#contactModal').modal('toggle');
+      });
+    </script>
   </body>
 </html>
