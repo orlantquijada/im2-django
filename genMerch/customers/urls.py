@@ -4,6 +4,6 @@ from . import views
 app_name = 'customers'
 
 urlpatterns = [
-    path('index', views.CustomerIndexView.as_view(), name="index_view"),
-    path('registration', views.CustomerRegView.as_view(), name="registration_view")
+    path('index', views.customer_index_view, name='dashboard'),
+    path('registration', views.customer_registration_view, name='customer_registration'),
 ]

@@ -1,269 +1,123 @@
 .main-content {
-  flex-grow: 1;
-  background-color: $gray0;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
 
-  position: relative;
+  .header-form {
+    @include flexbox($justify: flex-end);
 
-  .add {
-    position: absolute;
-    right: 7rem;
-    bottom: 5rem;
-
-    @media only screen and (max-width: 1440px) {
-      right: 2rem;
-      bottom: 2rem;
-    }
-
+    .dt-button,
     &__btn {
-      background-color: $light-red;
-      border: none;
       border-radius: $default-radius;
       font-weight: $bold;
-      padding: 1.25rem;
+      padding: 0.5rem 1rem;
       border: 1px solid black;
       cursor: pointer;
       transition: filter 200ms ease;
+      background: none;
+      font-size: 1rem;
+      line-height: 1.5rem;
+
+      background: $light-red;
 
       &:hover {
         filter: brightness(95%);
       }
     }
-  }
 
-  // .container {
-  //   padding-top: 4rem;
-  //   max-height: 80vh;
-  //   display: flex;
-  //   flex-direction: column;
-  // }
+    .dt-button {
+      margin: 0;
+      margin-right: 1rem;
 
-  .header,
-  .table {
-    background-color: white;
-    border-radius: $default-radius;
+      background: $light-orange;
 
-    .main-container {
-      margin: 0 2rem;
+      &:hover {
+        background: $light-orange;
+      }
     }
   }
 
-  .header {
-    margin-bottom: 1.25rem;
-    padding-top: 1.5rem;
+  .table {
+    border-radius: $default-radius;
 
-    .filter {
-      .main-container {
-        position: relative;
+    thead tr th:last-child {
+      // hax: something to do with bootstrap classes
+      // goal is to make the actions column as small as possible
+      width: 10px;
+    }
 
-        @include flexbox($justify: flex-start);
-      }
+    thead tr {
+      th {
+        color: $h-black;
+        background-color: white;
 
-      .title {
-        margin-right: 1rem;
-
-        @include flexbox;
-
-        &__icon {
-          margin-right: 0rem;
-        }
-
-        &__text {
-          font-size: 1rem;
-          font-weight: bold;
-        }
-      }
-
-      .filter-choices {
-        @include flexbox;
-
-        .filter-option:not(:last-child) {
-          margin-right: 1rem;
-        }
-      }
-
-      .filter-option-container {
-        position: relative;
-      }
-
-      .filter-search {
-        position: absolute;
-        left: 0;
-        margin-top: 0.5rem;
-
-        input {
-          width: 100%;
-          font-size: 1rem;
-          padding: 0.5rem 1rem;
-
-          border-radius: $default-radius;
-          border: 1px solid $gray4;
-
-          &:focus {
-            border: 1px solid black;
-          }
-        }
-
-        &--hide {
-          display: none;
-        }
-
-        &--show {
-          display: block;
-        }
-      }
-
-      .filter-option {
-        font-size: 1rem;
-        font-weight: $normal;
-        font-family: $lato;
-        border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: $default-radius;
-
-        transition: filter 150ms ease;
-
-        &.orange {
-          background-color: $light-orange;
-        }
-        &.blue {
-          background-color: $light-blue;
-        }
-        &.violet {
-          background-color: $light-violet;
-        }
-        &.green {
-          background-color: $light-green;
-        }
-        &.red {
-          background-color: $light-red;
-        }
-
-        &.yellow {
-          background-color: $light-yellow;
-        }
-
-        &:hover:not(.filter-keyword) {
-          cursor: pointer;
+        &:hover {
           filter: brightness(95%);
         }
 
-        &.filter-keyword {
-          position: absolute;
-          right: 0;
-          @include flexbox;
+        &:first-child {
+          border-top-left-radius: $default-radius;
+          border-bottom-left-radius: $default-radius;
+        }
 
-          .icon-container {
-            height: 1.25rem;
-            width: 1.25rem;
-            transform: translate(1rem, 1px);
-            cursor: pointer;
-            border-radius: $default-radius;
+        &:last-child {
+          border-top-right-radius: $default-radius;
+          border-bottom-right-radius: $default-radius;
+        }
+      }
+    }
 
-            transition: background-color 150ms ease;
+    tbody {
+      // table body last column
+      tr td:last-child {
+        button {
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
 
-            @include flexbox;
+          // edit
+          &:first-child {
+            margin-right: 1rem;
 
             &:hover {
-              background-color: rgba($color: #333, $alpha: 0.1);
+              svg path {
+                fill: $primary-blue;
+              }
+            }
+          }
+
+          // trashcan
+          &:last-child:hover {
+            svg path {
+              fill: #ff3a29;
             }
           }
         }
       }
-    }
-  }
 
-  .table {
-    overflow-y: auto;
-    scrollbar-width: none;
+      // table rows
+      .odd,
+      .even {
+        &:nth-child(even) {
+          background-color: white;
+        }
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
+        &:nth-child(odd) {
+          background-color: #f7f8fb;
+        }
 
-  .table-row {
-    height: 3.75rem;
-    display: flex;
-    align-items: center;
+        &:hover {
+          background-color: $gray3;
+        }
 
-    .main-container {
-      flex-grow: 1;
-    }
+        td {
+          border: none;
 
-    &.table-header {
-      margin-top: 2.5rem;
-      color: $gray4;
-      border-top: 1px solid $gray3;
-    }
-
-    &:not(.table-header) {
-      &:nth-child(even) {
-        background-color: $gray1;
+          &:last-child {
+            display: flex;
+            justify-content: center;
+          }
+        }
       }
-
-      &:hover {
-        background-color: $gray3;
-      }
-    }
-  }
-
-  .customer-grid,
-  .products-grid {
-    h5,
-    span {
-      font-size: 1rem;
-      font-weight: $normal;
-
-      &:last-child {
-        justify-self: flex-end;
-      }
-    }
-  }
-
-  .products-grid {
-    display: grid;
-    grid-template-areas: "name brand price items category date-registered";
-    grid-template-columns: repeat(6, 1fr);
-
-    .name {
-      grid-area: name;
-    }
-    .brand {
-      grid-area: brand;
-    }
-    .price {
-      grid-area: price;
-    }
-    .items {
-      grid-area: items;
-    }
-    .category {
-      grid-area: category;
-    }
-    .date-registered {
-      grid-area: date-registered;
-    }
-  }
-
-  .customer-grid {
-    display: grid;
-    grid-template-areas: "first-name last-name birthdate city date-registered";
-    grid-template-columns: repeat(5, 1fr);
-
-    .first-name {
-      grid-area: first-name;
-    }
-    .last-name {
-      grid-area: last-name;
-    }
-    .birthdate {
-      grid-area: birthdate;
-    }
-    .city {
-      grid-area: city;
-    }
-    .date-registered {
-      grid-area: date-registered;
     }
   }
 }
