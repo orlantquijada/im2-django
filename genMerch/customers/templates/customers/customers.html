@@ -558,12 +558,12 @@
             // buttonImageOnly: false,
             onSelect: function (date) {
               minDateFilter = new Date(date).getTime();
-              table.fnDraw();
+              table.draw();
             },
           })
           .keyup(function () {
             minDateFilter = new Date(this.value).getTime();
-            table.fnDraw();
+            table.draw();
           });
 
         $('#dto')
@@ -573,12 +573,12 @@
             // buttonImageOnly: false,
             onSelect: function (date) {
               maxDateFilter = new Date(date).getTime();
-              table.fnDraw();
+              table.draw();
             },
           })
           .keyup(function () {
             maxDateFilter = new Date(this.value).getTime();
-            table.fnDraw();
+            table.draw();
           });
       });
 
