@@ -8,3 +8,5 @@
 .vim/
 media/
 db.sqlite3
+# static images
+/genMerch/static/images/
