@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 from genMerch import globals, fields as custom_fields
@@ -67,6 +69,6 @@ class Person(models.Model):
 
 
 class Customer(Person):
-    date_registered = models.DateField(auto_now_add=True)
+    date_registered = models.DateField(default=date.today)
     last_modified = models.DateTimeField(auto_now=True)
     employee_id = models.PositiveIntegerField()
