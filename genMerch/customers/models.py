@@ -66,7 +66,7 @@ class Person(models.Model):
     @property
     def address(self):
         return f'{self.city}, {self.province} {self.country} {self.zip_code}'
-        
+
     class Meta:
         db_table = "Person"
 
