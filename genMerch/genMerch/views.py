@@ -5,12 +5,14 @@ from django.db.models.query import QuerySet
 class CustomTemplateView(TemplateView):
     template_name = ''
     queryset = None
+    default_form = None
     default_context = {}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context = {**context, **self.default_context}
+        context['form'] = self.default_form
 
         queryset = self.queryset
         if isinstance(queryset, QuerySet):
