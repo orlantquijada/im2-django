@@ -81,7 +81,8 @@
                 </div>
               </div>
               <div class="bs-stepper-content">
-                <form onSubmit="return false">
+                <form action={% url 'customers:customer_registration' %} method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
                   <div
                     id="test-l-1"
                     role="tabpanel"
@@ -98,6 +99,8 @@
                           class="form-control"
                           id="dateRegistered"
                           placeholder="Date Today"
+                          name="date_registered"
+                          required
                         />
                       </div>
                       <label class="col-2 col-form-label">Employee ID</label>
@@ -107,6 +110,8 @@
                           class="form-control"
                           id="emId"
                           placeholder="Employee ID"
+                          name="employee_id"
+                          required
                         />
                       </div>
                     </div>
@@ -118,6 +123,8 @@
                           class="form-control"
                           id="fName"
                           placeholder="First Name"
+                          name="first_name"
+                          required
                         />
                       </div>
                       <div class="col">
@@ -126,14 +133,17 @@
                           class="form-control"
                           id="mName"
                           placeholder="Middle Name"
+                          name="middle_name"
                         />
                       </div>
                       <div class="col">
                         <input
+                          name="last_name"
                           type="text"
                           class="form-control"
                           id="lName"
                           placeholder="Last Name"
+                          required
                         />
                       </div>
                     </div>
@@ -141,63 +151,71 @@
                       <label class="col-12">Address</label>
                       <div class="col-12">
                         <input
+                          name="city"
                           type="text"
                           class="form-control my-2"
                           id="address"
                           placeholder="Street/Brgy/City"
+                          required
                         />
                       </div>
                       <div class="col-4">
                         <input
+                          name="province"
                           type="text"
                           class="form-control"
                           id="province"
                           placeholder="Province"
+                          required
                         />
                       </div>
                       <div class="col-4">
                         <input
+                          name="zip_code"
                           type="number"
                           class="form-control"
                           id="zip"
                           placeholder="Zip"
+                          required
                         />
                       </div>
                       <div class="col-4">
                         <input
+                          name="country"
                           type="text"
                           class="form-control"
                           id="country"
                           placeholder="Country"
+                          required
                         />
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-4">
                         <label for="bdate">Birthdate</label>
-                        <input type="date" class="form-control" id="bdate" />
+                        <input type="date" class="form-control" id="bdate" name="birthdate" required>
                       </div>
                       <div class="form-group col-md-4">
                         <label for="status">Status</label>
                         <select id="status" name="status" class="form-control">
-                          <option value="single">Single</option>
-                          <option value="married">Married</option>
-                          <option value="widow">Widow/er</option>
-                          <option value="divorced">Divorced</option>
+                          {% for stat in form.status %}
+                            {{ stat }}
+                          {% endfor %}
                         </select>
                       </div>
                       <div class="form-group col-md-4">
-                        <label class="">Gender</label>
-                        <select id="gender" name="gender" class="form-control">
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                        <label class="">Sex</label>
+                        <select id="gender" name="sex" class="form-control">
+                          {% for sex in form.sex %}
+                            {{ sex }}
+                          {% endfor %}
                         </select>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-4">
                         <label for="spouse">Spouse's Name</label>
-                        <input type="text" class="form-control" id="spouse" />
+                        <input type="text" class="form-control" id="spouse" name="spouse_name"/>
                       </div>
                       <div class="form-group col-md-4">
                         <label for="spouseOcc">Spouse Occupation</label>
@@ -205,21 +223,24 @@
                           type="text"
                           class="form-control"
                           id="spouseOcc"
+                          name="spouse_occupation"
                         />
                       </div>
                       <div class="form-group col-md-4">
                         <label>No. of Children</label>
                         <input
+                          name="number_of_children"
                           type="number"
                           class="form-control"
                           id="childNo"
+                          value="0"
                         />
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="mother">Mother's Name</label>
-                        <input type="text" class="form-control" id="mother" />
+                        <input type="text" class="form-control" id="mother" name="mother_name"/>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="motherOcc">Occupation</label>
@@ -227,13 +248,14 @@
                           type="text"
                           class="form-control"
                           id="motherOcc"
+                          name="mother_occupation"
                         />
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="father">Father's Name</label>
-                        <input type="text" class="form-control" id="father" />
+                        <input type="text" class="form-control" id="father" name="father_name"/>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="fatherOcc">Occupation</label>
@@ -241,21 +263,22 @@
                           type="text"
                           class="form-control"
                           id="fatherOcc"
+                          name="father_occupation"
                         />
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-4">
                         <label for="height">Height</label>
-                        <input type="number" class="form-control" id="height" />
+                        <input type="number" class="form-control" id="height" name="height" required/>
                       </div>
                       <div class="form-group col-md-4">
                         <label for="weight">Weight</label>
-                        <input type="number" class="form-control" id="weight" />
+                        <input type="number" class="form-control" id="weight" name="weight" required/>
                       </div>
                       <div class="form-group col-md-4">
                         <label>Religion</label>
-                        <input type="text" class="form-control" id="religion" />
+                        <input type="text" class="form-control" id="religion" name="religion"/>
                       </div>
                     </div>
                     <div class="row">
@@ -265,7 +288,7 @@
                         <div class="row">
                           <div class="col text-center">
                             <label>Profile Picture</label>
-                            <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" />
+                            <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" name="profile_pic" required />
                           </div>
                          
                         </div>
@@ -742,7 +765,8 @@
                       >
                         Previous
                       </button>
-                      <button type="submit" class="btn btn-primary next">
+                      <input type="submit" value="Submit">
+                      <button type="submit" class="btn btn-primary" style="position: absolute; right: 0">
                         Submit
                       </button>
                     </div>
@@ -756,6 +780,17 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
     <script>
+      const preventDefault = (btn) => {
+        btn.addEventListener('click', (event) => {
+          event.preventDefault();
+        })
+      }
+
+      const prevButtons = document.querySelectorAll('.previous');
+      prevButtons.forEach(preventDefault);
+      const nextButtons = document.querySelectorAll('.next');
+      nextButtons.forEach(preventDefault)
+
       const stepper1 = new Stepper(document.querySelector('#stepper1'));
 
       $(document).ready(function () {
