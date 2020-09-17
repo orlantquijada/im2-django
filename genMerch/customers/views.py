@@ -16,18 +16,11 @@ class CustomerRegistrationTemplateView(custom_views.CustomTemplateView):
     default_form = forms.CustomerRegistrationModelForm
     default_context = {'is_customer': True}
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['form'] = self.default_form()
-
-        return context
-
     def post(self, request):
         form = self.default_form(request.POST, request.FILES)
-        context = self.get_context_data()
 
         if form.is_valid():
             form.save()
 
-            return redirect(reverse('customers:dashboard'), kwargs=context)
-        return render(request, self.template_name, context=context)
+            return redirect(reverse('customers:dashboard'))
+        return render(request, self.template_name)
