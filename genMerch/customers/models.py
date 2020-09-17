@@ -68,8 +68,14 @@ class Person(models.Model):
     def address(self):
         return f'{self.city}, {self.province} {self.country} {self.zip_code}'
 
+    class Meta:
+        db_table = "Person"
+
 
 class Customer(Person):
     date_registered = models.DateField(default=date.today)
     last_modified = models.DateTimeField(auto_now=True)
     employee_id = models.PositiveIntegerField()
+
+    class Meta:
+        db_table = "Customer"

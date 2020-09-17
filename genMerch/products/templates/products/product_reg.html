@@ -36,14 +36,15 @@
             <h3>Product Registration</h3>
             &nbsp;
             <h5>Product Information:</h5>
-            <form id="prodReg">
+            <form id="prodReg" enctype="multipart/form-data" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="form-row mb-3">
                 <div class="col-1"></div>
                 <div class="col-2">
                   <label>Date Registered</label>
                 </div>
                 <div class="col-9">
-                  <input type="date" class="form-control" id="prodDateReg" />
+                  <input type="date" class="form-control" id="prodDateReg" name="date_reg" required />
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -52,7 +53,7 @@
                   <label>SKU</label>
                 </div>
                 <div class="col-9">
-                  <input type="number" class="form-control" id="sku" />
+                  <input type="number" class="form-control" id="sku_id" name="sku" required />
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -61,7 +62,7 @@
                   <label>Category</label>
                 </div>
                 <div class="col-9">
-                  <input type="text" class="form-control" id="category" />
+                  <input type="text" class="form-control" id="category_id" name="category" required />
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -70,7 +71,7 @@
                   <label>Name</label>
                 </div>
                 <div class="col-9">
-                  <input type="text" class="form-control" id="prodName" />
+                  <input type="text" class="form-control" id="prodName" name="prod_name" required/>
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -79,7 +80,7 @@
                   <label>Brand</label>
                 </div>
                 <div class="col-9">
-                  <input type="text" class="form-control" id="prodbrand" />
+                  <input type="text" class="form-control" id="prodbrand" name="prodbrand" required />
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -88,7 +89,7 @@
                   <label>Color</label>
                 </div>
                 <div class="col-9">
-                  <input type="text" class="form-control" id="prodcolor" />
+                  <input type="text" class="form-control" id="prodcolor" name="prodColor" required/>
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -97,7 +98,7 @@
                   <label>Size/Dimension</label>
                 </div>
                 <div class="col-9">
-                  <input type="number" class="form-control" id="prodsize" />
+                  <input type="number" class="form-control" id="prodsize" name="prodSize" required/>
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -111,6 +112,8 @@
                     class="form-control"
                     id="prodPrice"
                     placeholder="Php"
+                    name="prodPrice"
+                    required
                   />
                 </div>
               </div>
@@ -120,7 +123,7 @@
                   <label>No. of Stocks</label>
                 </div>
                 <div class="col-9">
-                  <input type="number" class="form-control" id="prodStocks" />
+                  <input type="number" class="form-control" id="prodStocks" name="prodStocks"  required/>
                 </div>
               </div>
               <div class="form-row mb-3">
@@ -132,17 +135,17 @@
               <div class="form-row mb-3">
                 <div class="col">
                   <img id="img" src="#" alt="">
-                  <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" />
+                  <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" name="img1"/>
                   
                 </div>
                 <div class="col">
                   <img id="img1" src="#" alt="">
-                  <input type="file" onchange="readURL2(this);" class="form-control" id="prodimg2" />
+                  <input type="file" onchange="readURL2(this);" class="form-control" id="prodimg2" name="img2" />
                   
                 </div>
                 <div class="col">
                   <img id="img2" src="#" alt="">
-                  <input type="file" onchange="readURL3(this);" class="form-control" id="prodimg3" />
+                  <input type="file" onchange="readURL3(this);" class="form-control" id="prodimg3" name="img3" />
                   
                 </div>
               </div>
