@@ -10,5 +10,4 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = models.Product
-        fields = ('date_registered', 'sku', 'category', 'prod_name', 'brand',
-                  'color', 'size', 'price', 'stocks', 'img1', 'img2', 'img3')
+        fields = '__all__'
