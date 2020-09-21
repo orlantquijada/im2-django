@@ -8,13 +8,14 @@ from genMerch import views as custom_views
 class ProductIndexTemplateView(custom_views.CustomTemplateView):
     template_name = 'products/products.html'
     queryset = models.Product.objects.all()  # pylint: disable=no-member
+    
 
 
 class ProductRegistrationTemplateView(custom_views.CustomTemplateView):
     template_name = 'products/product_reg.html'
     queryset = models.Product.objects.all()  # pylint: disable=no-member
     default_form = forms.ProductForm
-
+    
     @transaction.atomic
     def post(self, request):
         form = self.default_form(request.POST, request.FILES)
