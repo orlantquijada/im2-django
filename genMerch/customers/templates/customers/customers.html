@@ -48,7 +48,8 @@
 
 {% block content %}
      <!-- Modal for view/edit -->
-     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     {% for customer in queryset %}
+     <div class="modal fade" id="editModal-{{customer.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -65,7 +66,7 @@
                   type="text"
                   class="form-control"
                   id="fName"
-                  placeholder="First Name"
+                  placeholder="{{customer.first_name}}"
                 />
               </div>
               <div class="col">
@@ -73,7 +74,7 @@
                   type="text"
                   class="form-control"
                   id="mName"
-                  placeholder="Middle Name"
+                  placeholder="{{customer.middle_name}}"
                 />
               </div>
               <div class="col">
@@ -81,7 +82,7 @@
                   type="text"
                   class="form-control"
                   id="lName"
-                  placeholder="Last Name"
+                  placeholder="{{customer.last_name}}"
                 />
               </div>
             </div>
@@ -92,7 +93,7 @@
                   type="text"
                   class="form-control my-2"
                   id="address"
-                  placeholder="Street/Brgy/City"
+                  placeholder="{{customer.city}}"
                 />
               </div>
               <div class="col-4">
@@ -100,7 +101,7 @@
                   type="text"
                   class="form-control"
                   id="province"
-                  placeholder="Province"
+                  placeholder="{{customer.province}}"
                 />
               </div>
               <div class="col-4">
@@ -108,7 +109,7 @@
                   type="number"
                   class="form-control"
                   id="zip"
-                  placeholder="Zip"
+                  placeholder="{{customer.zip_code}}"
                 />
               </div>
               <div class="col-4">
@@ -116,18 +117,18 @@
                   type="text"
                   class="form-control"
                   id="country"
-                  placeholder="Country"
+                  placeholder="{{customer.country}}"
                 />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="bdate">Birthdate</label>
-                <input type="date" class="form-control" id="bdate" />
+                <input type="date" class="form-control" id="bdate"  placeholder="{{customer.birthdate}}"/>
               </div>
               <div class="form-group col-md-4">
                 <label for="status">Status</label>
-                <select id="status" name="status" class="form-control">
+                <select id="status" name="status" class="form-control" placeholder="{{customer.status}}">
                   <option value="single">Single</option>
                   <option value="married">Married</option>
                   <option value="widow">Widow/er</option>
@@ -136,7 +137,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label class="">Gender</label>
-                <select id="gender" name="gender" class="form-control">
+                <select id="gender" name="gender" class="form-control" placeholder="{{customer.sex}}">
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
@@ -145,7 +146,7 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="spouse">Spouse's Name</label>
-                <input type="text" class="form-control" id="spouse" />
+                <input type="text" class="form-control" id="spouse"placeholder="{{customer.spouse_name}}" />
               </div>
               <div class="form-group col-md-4">
                 <label for="spouseOcc">Spouse Occupation</label>
@@ -153,6 +154,7 @@
                   type="text"
                   class="form-control"
                   id="spouseOcc"
+                  placeholder="{{customer.spouse_occupation}}"
                 />
               </div>
               <div class="form-group col-md-4">
@@ -161,13 +163,14 @@
                   type="number"
                   class="form-control"
                   id="childNo"
+                  placeholder="{{customer.number_of_children}}"
                 />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="mother">Mother's Name</label>
-                <input type="text" class="form-control" id="mother" />
+                <input type="text" class="form-control" id="mother"  placeholder="{{customer.mother_name}}"/>
               </div>
               <div class="form-group col-md-6">
                 <label for="motherOcc">Occupation</label>
@@ -175,13 +178,14 @@
                   type="text"
                   class="form-control"
                   id="motherOcc"
+                  placeholder="{{customer.mother_occupation}}"
                 />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="father">Father's Name</label>
-                <input type="text" class="form-control" id="father" />
+                <input type="text" class="form-control" id="father" placeholder="{{customer.father_name}}"/>
               </div>
               <div class="form-group col-md-6">
                 <label for="fatherOcc">Occupation</label>
@@ -189,23 +193,40 @@
                   type="text"
                   class="form-control"
                   id="fatherOcc"
+                  placeholder="{{customer.father_occupation}}"
                 />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="height">Height</label>
-                <input type="number" class="form-control" id="height" />
+                <input type="number" class="form-control" id="height" placeholder="{{customer.height}}" />
               </div>
               <div class="form-group col-md-4">
                 <label for="weight">Weight</label>
-                <input type="number" class="form-control" id="weight" />
+                <input type="number" class="form-control" id="weight" placeholder="{{customer.weight}}"/>
               </div>
               <div class="form-group col-md-4">
                 <label>Religion</label>
-                <input type="text" class="form-control" id="religion" />
+                <input type="text" class="form-control" id="religion" placeholder="{{customer.religion}}" />
               </div>
             </div>
+            <div class="row">
+              <div class="col"></div>
+              <div class="col">
+                <img id="img" src="/{{customer.profile_pic}}" alt="" height="300" width="300">
+                <div class="row">
+                  <div class="col text-center">
+                    <label>Profile Picture</label>
+                    <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" name="profile_pic" required />
+                  </div>
+                 
+                </div>
+                
+              </div>
+              <div class="col"></div>
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -214,7 +235,7 @@
         </div>
       </div>
     </div>
-
+    {% endfor %}
 
     <!-- Modal for delete -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -278,7 +299,7 @@
                     <td>{{ customer.city }}</td>
                     <td>{{ customer.date_registered }}</td>
                     <td>
-                      <button type="button" class="edit">View</button>
+                      <button type="button" class="edit" data-toggle="modal" data-target="#editModal-{{customer.id}}">View</button>
                       <button type="button" class="delete">Delete</button>
                     </td>
                   </tr>
@@ -336,9 +357,9 @@
 
         table.buttons().container().appendTo('#export');
 
-        table.on('click', '.edit', function () {
-          $('#editModal').modal('show');
-        });
+        // table.on('click', '.edit', function () {
+        //   $('#editModal').modal('show');
+        // });
 
         table.on('click', '.delete', function () {
           $('#deleteModal').modal('show');
@@ -398,5 +419,21 @@
 
         return true;
       });
+
+      function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+              //  alert("INSIDE!");
+                reader.onload = function (e) {
+                    $('#img')
+                        .attr('src', e.target.result)
+                        .width(300)
+                        .height(300);
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 {% endblock content %}
