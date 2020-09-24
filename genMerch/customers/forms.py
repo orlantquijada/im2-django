@@ -6,4 +6,4 @@ from customers import models
 class CustomerRegistrationModelForm(ModelForm):
     class Meta:
         model = models.Customer
-        fields = '__all__' 
+        fields = '__all__'

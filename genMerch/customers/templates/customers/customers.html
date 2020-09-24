@@ -58,212 +58,227 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <div class="form-group col">
-                <label class="col-12">Date Registered</label>
-                <div class="col">
-                  <input type="text" class="form-control"  placeholder="{{customer.date_registered}}" readonly/>
-                </div>
-              </div>
-              <div class="form-group col">
-                <label class="col-12">Employee Id</label>
-                <div class="col">
-                  <input type="text" class="form-control"  placeholder="{{customer.employee_id}}" readonly/>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-12">Name</label>
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fName"
-                  placeholder="{{customer.first_name}}"
-                />
-              </div>
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="mName"
-                  placeholder="{{customer.middle_name}}"
-                />
-              </div>
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="lName"
-                  placeholder="{{customer.last_name}}"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-12">Contact Info</label>
-              <div class="col">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="{{ customer.email }}"
-                />
-              </div>
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="{{ customer.phone_number }}"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-12">Address</label>
-              <div class="col-12">
-                <input
-                  type="text"
-                  class="form-control my-2"
-                  id="address"
-                  placeholder="{{customer.city}}"
-                />
-              </div>
-              <div class="col-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="province"
-                  placeholder="{{customer.province}}"
-                />
-              </div>
-              <div class="col-4">
-                <input
-                  type="number"
-                  class="form-control"
-                  id="zip"
-                  placeholder="{{customer.zip_code}}"
-                />
-              </div>
-              <div class="col-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="country"
-                  placeholder="{{customer.country}}"
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="bdate">Birthdate</label>
-                <input type="date" class="form-control" id="bdate"  placeholder="{{customer.birthdate}}"/>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="status">Status</label>
-                <select id="status" name="status" class="form-control" placeholder="{{customer.status}}">
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="widow">Widow/er</option>
-                  <option value="divorced">Divorced</option>
-                </select>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="">Gender</label>
-                <select id="gender" name="gender" class="form-control" placeholder="{{customer.sex}}">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="spouse">Spouse's Name</label>
-                <input type="text" class="form-control" id="spouse"placeholder="{{customer.spouse_name}}" />
-              </div>
-              <div class="form-group col-md-4">
-                <label for="spouseOcc">Spouse Occupation</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="spouseOcc"
-                  placeholder="{{customer.spouse_occupation}}"
-                />
-              </div>
-              <div class="form-group col-md-4">
-                <label>No. of Children</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="childNo"
-                  placeholder="{{customer.number_of_children}}"
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="mother">Mother's Name</label>
-                <input type="text" class="form-control" id="mother"  placeholder="{{customer.mother_name}}"/>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="motherOcc">Occupation</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="motherOcc"
-                  placeholder="{{customer.mother_occupation}}"
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="father">Father's Name</label>
-                <input type="text" class="form-control" id="father" placeholder="{{customer.father_name}}"/>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="fatherOcc">Occupation</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fatherOcc"
-                  placeholder="{{customer.father_occupation}}"
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="height">Height</label>
-                <input type="number" class="form-control" id="height" placeholder="{{customer.height}}" />
-              </div>
-              <div class="form-group col-md-4">
-                <label for="weight">Weight</label>
-                <input type="number" class="form-control" id="weight" placeholder="{{customer.weight}}"/>
-              </div>
-              <div class="form-group col-md-4">
-                <label>Religion</label>
-                <input type="text" class="form-control" id="religion" placeholder="{{customer.religion}}" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col"></div>
-              <div class="col">
-                <img id="img" src="{{ customer.profile_pic.url }}" alt="" height="300" width="300">
-                <div class="row">
-                  <div class="col text-center">
-                    <label>Profile Picture</label>
-                    <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" name="profile_pic" required />
+          <form action={% url 'customers:dashboard' %} method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-body">
+              <div class="form-group row">
+                <div class="form-group col">
+                  <label class="col-12">Date Registered</label>
+                  <div class="col">
+                    <input
+                    type="text"
+                    class="form-control"
+                    value="{{customer.date_registered|date:'Y-m-d'}}"
+                    name="date_registered"
+                    readonly
+                    />
                   </div>
-
                 </div>
-
+                <div class="form-group col">
+                  <label class="col-12">Employee Id</label>
+                  <div class="col">
+                    <input type="text" class="form-control"  value="{{customer.employee_id}}" readonly name="employee_id" />
+                  </div>
+                </div>
               </div>
-              <div class="col"></div>
+              <div class="form-group row">
+                <label class="col-12">Name</label>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="first_name"
+                    value="{{customer.first_name}}"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="middle_name"
+                    value="{{customer.middle_name}}"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="last_name"
+                    value="{{customer.last_name}}"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-12">Contact Info</label>
+                <div class="col">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    value="{{ customer.email }}"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="phone_number"
+                    value="{{ customer.phone_number }}"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-12">Address</label>
+                <div class="col-12">
+                  <input
+                    type="text"
+                    class="form-control my-2"
+                    name="city"
+                    value="{{customer.city}}"
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="province"
+                    value="{{customer.province}}"
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="zip_code"
+                    value="{{customer.zip_code}}"
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="country"
+                    value="{{customer.country}}"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="bdate">Birthdate</label>
+                  <input type="date" class="form-control" name="birthdate"  value="{{customer.birthdate|date:'Y-m-d'}}"/>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="status">Status</label>
+                  <select name="status" class="form-control" value="{{customer.status}}">
+                    {% for s in form.status %}
+                      {{ s  }}
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="">Gender</label>
+                  <select name="sex" class="form-control" value="{{ customer.sex }}">
+                    {% for sex in form.sex %}
+                      {{ sex }}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="spouse">Spouse's Name</label>
+                  <input type="text" class="form-control" name="spouse_name" value="{{customer.spouse_name}}" />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="spouseOcc">Spouse Occupation</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="spouse_occupation"
+                    value="{{customer.spouse_occupation}}"
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label>No. of Children</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="number_of_children"
+                    value="{{customer.number_of_children}}"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="mother">Mother's Name</label>
+                  <input type="text" class="form-control" name="mother_name"  value="{{customer.mother_name}}"/>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="motherOcc">Occupation</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="mother_occupation"
+                    value="{{customer.mother_occupation}}"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="father">Father's Name</label>
+                  <input type="text" class="form-control" name="father_name" value="{{customer.father_name}}"/>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="fatherOcc">Occupation</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="father_occupation"
+                    value="{{customer.father_occupation}}"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="height">Height</label>
+                  <input type="number" class="form-control" name="height" value="{{customer.height}}" />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="weight">Weight</label>
+                  <input type="number" class="form-control" name="weight" value="{{customer.weight}}"/>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Religion</label>
+                  <input type="text" class="form-control" name="religion" value="{{customer.religion}}" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                  <img src="{{ customer.profile_pic.url }}" alt="" height="300" width="300">
+                  <div class="row">
+                    <div class="col text-center">
+                      <label>Profile Picture</label>
+                      <input
+                        type="file"
+                        onchange="readURL(this);"
+                        class="form-control"
+                        name="profile_pic"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col"></div>
+              </div>
             </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-warning">Update</button>
-          </div>
-        </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-warning">Update</button>
+              <input type="hidden" name="id" value="{{ customer.id }}">
+            </div>
+          </form>
+       </div>
       </div>
     </div>
     {% endfor %}

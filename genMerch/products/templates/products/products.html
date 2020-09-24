@@ -38,8 +38,8 @@
 {% block title %} Products {% endblock title %}
 
 {% block content %}
-    {%for product in queryset %}  
-      <!-- Modal for view/edit --> 
+    {%for product in queryset %}
+      <!-- Modal for view/edit -->
       <div class="modal" id="editModal-{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -57,7 +57,7 @@
                     <label>Date Registered</label>
                   </div>
                   <div class="col-6">
-                    <input type="text" class="form-control" id="prodDateReg" placeholder="{{product.date_registered}}" readonly/>
+                    <input type="text" class="form-control" id="prodDateReg" value="{{product.date_registered|date:'Y-m-d'}}" readonly/>
                   </div>
                   <div class="col-3"></div>
                 </div>
@@ -152,19 +152,19 @@
                     <label>Images:</label>
                   </div>
                 </div>
-                   <div class="form-row"> 
-                      
+                   <div class="form-row">
+
                       {% for product_image in product.product_images.all %}
                       <div class="col square">
-                        
+
                           <img id = "img" src="{{ product_image.image.url }}" height="230" width="230"/>
                         <br /><br />
                         <!-- <img id="img" src="{{img}}" alt=""> -->
                         <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" />
-                       
+
                       </div>
                       {% endfor %}
-                     
+
                     </div>
                 </form>
             </div>
@@ -246,7 +246,7 @@
                   <button type="button" class="delete">Delete</button>
                 </td>
               </tr>
-     
+
               {% endfor %}
             </tbody>
           </table>
@@ -258,7 +258,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+
     <!--datatable-->
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
@@ -285,7 +285,7 @@
               titleAttr: 'Excel',
               className: 'btn',
             },
-   
+
           ]
         });
 
@@ -322,7 +322,7 @@
         });
 
       });
-      
+
 
       $.fn.dataTableExt.afnFiltering.push(
         function(oSettings, aData, iDataIndex) {
@@ -355,7 +355,7 @@
                         .attr('src', e.target.result)
                         .width(160)
                         .height(160);
-                    
+
                 };
 
                 reader.readAsDataURL(input.files[0]);
@@ -371,7 +371,7 @@
                         .attr('src', e.target.result)
                         .width(160)
                         .height(160);
-                    
+
                 };
 
                 reader.readAsDataURL(input.files[0]);
@@ -387,7 +387,7 @@
                         .attr('src', e.target.result)
                         .width(160)
                         .height(160);
-                    
+
                 };
 
                 reader.readAsDataURL(input.files[0]);

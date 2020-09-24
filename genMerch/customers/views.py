@@ -7,6 +7,7 @@ from genMerch import views as custom_views
 class CustomerIndexTemplateView(custom_views.CustomTemplateView):
     template_name = 'customers/customers.html'
     queryset = models.Customer.objects.all()  # pylint: disable=no-member
+    default_form = forms.CustomerRegistrationModelForm
     default_context = {'is_customer': True}
 
 

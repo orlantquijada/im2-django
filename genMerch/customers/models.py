@@ -30,7 +30,7 @@ class Person(models.Model):
         max_length=globals.DEFAULT_MAX_LENGTH)
 
     sex = models.CharField(
-        max_length=1, choices=choices.Sex.choices, null=True, blank=True)
+        max_length=1, choices=choices.Sex.choices, default=choices.Sex.MALE)
     birthdate = models.DateField()
     status = models.CharField(
         max_length=1, choices=choices.Status.choices, default=choices.Status.SINGLE)
