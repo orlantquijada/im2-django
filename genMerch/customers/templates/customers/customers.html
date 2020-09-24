@@ -60,6 +60,20 @@
           </div>
           <div class="modal-body">
             <div class="form-group row">
+              <div class="form-group col">
+                <label class="col-12">Date Registered</label>
+                <div class="col">
+                  <input type="text" class="form-control"  placeholder="{{customer.date_registered}}" readonly/>
+                </div>
+              </div>
+              <div class="form-group col">
+                <label class="col-12">Employee Id</label>
+                <div class="col">
+                  <input type="text" class="form-control"  placeholder="{{customer.employee_id}}" readonly/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
               <label class="col-12">Name</label>
               <div class="col">
                 <input
@@ -83,6 +97,23 @@
                   class="form-control"
                   id="lName"
                   placeholder="{{customer.last_name}}"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12">Contact Info</label>
+              <div class="col">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="{{ customer.email }}"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="{{ customer.phone_number }}"
                 />
               </div>
             </div>
@@ -220,9 +251,9 @@
                     <label>Profile Picture</label>
                     <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" name="profile_pic" required />
                   </div>
-                 
+
                 </div>
-                
+
               </div>
               <div class="col"></div>
             </div>
@@ -277,8 +308,7 @@
                 </a>
               </div>
             </div>
-            
-            {% comment %} <table id="datatable" class="table table-striped table-bordered table-curved"> {% endcomment %}
+
             <table id="datatable" class="table">
               <thead>
                 <tr>
@@ -429,7 +459,7 @@
                         .attr('src', e.target.result)
                         .width(300)
                         .height(300);
-                    
+
                 };
 
                 reader.readAsDataURL(input.files[0]);

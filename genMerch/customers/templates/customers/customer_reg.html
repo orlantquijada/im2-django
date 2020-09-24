@@ -148,6 +148,27 @@
                       </div>
                     </div>
                     <div class="form-group row">
+                      <label class="col-12">Contact Info</label>
+                      <div class="col">
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="Email Address"
+                          name="email"
+                          required
+                        />
+                      </div>
+                      <div class="col">
+                        <input
+                          name="phone_number"
+                          type="text"
+                          class="form-control"
+                          placeholder="Phone Number"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
                       <label class="col-12">Address</label>
                       <div class="col-12">
                         <input
@@ -205,7 +226,7 @@
                       </div>
                       <div class="form-group col-md-4">
                         <label class="">Sex</label>
-                        <select id="gender" name="sex" class="form-control">
+                        <select id="gender" name="sex" class="form-control" required>
                           {% for sex in form.sex %}
                             {{ sex }}
                           {% endfor %}
@@ -240,7 +261,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="mother">Mother's Name</label>
-                        <input type="text" class="form-control" id="mother" name="mother_name"/>
+                        <input type="text" class="form-control" id="mother" name="mother_name" required/>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="motherOcc">Occupation</label>
@@ -255,7 +276,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="father">Father's Name</label>
-                        <input type="text" class="form-control" id="father" name="father_name"/>
+                        <input type="text" class="form-control" id="father" name="father_name" required/>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="fatherOcc">Occupation</label>
