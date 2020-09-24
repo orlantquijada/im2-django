@@ -38,12 +38,12 @@ class Person(models.Model):
     number_of_children = models.PositiveIntegerField(default=0)
 
     father_name = custom_fields.TitleCaseCharfield(
-        max_length=globals.LONG_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.LONG_MAX_LENGTH)
     father_occupation = custom_fields.TitleCaseCharfield(
         max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
 
     mother_name = custom_fields.TitleCaseCharfield(
-        max_length=globals.LONG_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.LONG_MAX_LENGTH)
     mother_occupation = custom_fields.TitleCaseCharfield(
         max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
 
