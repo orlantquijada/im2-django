@@ -81,7 +81,7 @@
                 </div>
               </div>
               <div class="bs-stepper-content">
-                <form action={% url 'customers:customer_registration' %} method="POST" enctype="multipart/form-data">
+                <form action={% url 'customers:customer_registration' %} method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                   {% csrf_token %}
                   <div
                     id="test-l-1"
@@ -96,7 +96,7 @@
                       <div class="col-4">
                         <input
                           type="date"
-                          class="form-control"
+                          class="validate form-control"
                           id="dateRegistered"
                           placeholder="Date Today"
                           name="date_registered"
@@ -107,7 +107,7 @@
                       <div class="col-4">
                         <input
                           type="text"
-                          class="form-control"
+                          class="validate form-control"
                           id="emId"
                           placeholder="Employee ID"
                           name="employee_id"
@@ -123,6 +123,7 @@
                           class="form-control"
                           id="fName"
                           placeholder="First Name"
+                          min="2"
                           name="first_name"
                           required
                         />
@@ -142,6 +143,7 @@
                           type="text"
                           class="form-control"
                           id="lName"
+                          min="2"
                           placeholder="Last Name"
                           required
                         />
@@ -155,15 +157,18 @@
                           class="form-control"
                           placeholder="Email Address"
                           name="email"
+                          id="inputMailForm"
                           required
                         />
                       </div>
                       <div class="col">
                         <input
                           name="phone_number"
-                          type="text"
-                          class="form-control"
-                          placeholder="Phone Number"
+                          type="tel"
+                          onkeypress="return isNumberKey(event)"
+                          class="validate form-control"
+                          placeholder="Phone Number e.g. 09xxxxxxxxx"
+                          pattern="[0]{1}[9]{1}[0-9]{9}"
                           required
                         />
                       </div>
@@ -321,7 +326,7 @@
                     <div class="form-row buttons mt-4">
                       <button
                         class="btn btn-primary next"
-                        onclick="stepper1.next()"
+                        onclick="stepper1.next()"    
                       >
                         Next
                       </button>
@@ -700,8 +705,7 @@
                         Previous
                       </button>
                       <button
-                        class="btn btn-primary next"
-                        onclick="stepper1.next()"
+                        class="btn btn-primary next"   
                       >
                         Next
                       </button>
@@ -812,7 +816,47 @@
       const nextButtons = document.querySelectorAll('.next');
       nextButtons.forEach(preventDefault)
 
-      const stepper1 = new Stepper(document.querySelector('#stepper1'));
+     // const stepper1 = new Stepper(document.querySelector('#stepper1'));
+      var stepperFormEl = document.querySelector('#stepper1');
+      window.stepperForm = new Stepper(stepperFormEl, {
+        animation: true
+      })
+
+      var btnNextList = [].slice.call(document.querySelectorAll('.next'))
+      var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'))
+      var inputMailForm = document.getElementById('inputMailForm')
+      var form = stepperFormEl.querySelector('.bs-stepper-content form')
+
+      btnNextList.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          window.stepperForm.next()
+        })
+      })
+
+      stepperFormEl.addEventListener('show.bs-stepper', function (event) {
+        form.classList.remove('was-validated')
+        var nextStep = event.detail.indexStep
+        var currentStep = nextStep
+
+        if (currentStep > 0) {
+          currentStep--
+        }
+
+        var stepperPan = stepperPanList[currentStep]
+
+        if ((stepperPan.getAttribute('id') === 'test-l-1' && !inputMailForm.value.length) ) {
+          event.preventDefault()
+          form.classList.add('was-validated')
+        }
+      })
+      
+      //input only numeric values
+      function isNumberKey(evt){
+          var charCode = (evt.which) ? evt.which : evt.keyCode
+          if (charCode > 31 && (charCode < 48 || charCode > 57))
+              return false;
+          return true;
+      }
 
       $(document).ready(function () {
         $(this).on('click', '.appendElem', function () {
