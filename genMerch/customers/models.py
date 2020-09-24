@@ -4,7 +4,7 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 
 from genMerch import globals, fields as custom_fields
-from customers import choices, validators
+from customers import choices
 
 
 class Person(models.Model):
@@ -15,13 +15,8 @@ class Person(models.Model):
     last_name = custom_fields.TitleCaseCharfield(
         max_length=globals.DEFAULT_MAX_LENGTH)
 
-    email = models.EmailField(null=True, blank=True)
-    phone_number = models.CharField(
-        null=True, blank=True,
-        max_length=globals.PHONE_NUMBER_MAX_LENGTH,
-        validators=[
-            MinLengthValidator(limit_value=globals.PHONE_NUMBER_MIN_LENGTH),
-            validators.validate_phone_number])
+    email = models.EmailField(null=True, blank=True, unique=True)
+    phone_number = custom_fields.PhoneNumberField(null=True, blank=True)
 
     profile_pic = models.ImageField(
         upload_to='images/customers/profile-pics/')

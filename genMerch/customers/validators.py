@@ -8,18 +8,24 @@ def validate_phone_number(value: str):
     if value[0:2] != '09':
         invalid = True
 
-    # checks if phone number has - :0922-222-2222
+    # value format: 0922-222-2222
     elif '-' in value:
-        phone_number = value.split('-')
+        while True:
+            if len(value) != 13:
+                invalid = True
+                break
 
-        if len(phone_number) != 3:
-            invalid = True
+            # checks if - is in the correct position
+            if value.find('-') != 4 and value.rfind('-') != 8:
+                invalid = True
+                break
 
-        if not invalid:
-            for num in phone_number:
+            # checks if there are non numeric characters other than -
+            for num in value.split('-'):
                 if not num.isnumeric():
                     invalid = True
                     break
+            break
 
     # value now must be 09222222222
     elif not value.isnumeric() or len(value) != 11:
