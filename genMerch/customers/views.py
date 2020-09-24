@@ -24,4 +24,8 @@ class CustomerRegistrationTemplateView(custom_views.CustomTemplateView):
             form.save()
 
             return redirect(reverse('customers:dashboard'))
-        return render(request, self.template_name)
+
+        context = self.get_context_data()
+        context['has_error'] = True
+
+        return render(request, self.template_name, context=context)

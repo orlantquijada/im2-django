@@ -11,7 +11,7 @@ class Person(models.Model):
     first_name = custom_fields.TitleCaseCharfield(
         max_length=globals.DEFAULT_MAX_LENGTH)
     middle_name = custom_fields.TitleCaseCharfield(
-        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True, default='')
     last_name = custom_fields.TitleCaseCharfield(
         max_length=globals.DEFAULT_MAX_LENGTH)
 
@@ -36,25 +36,25 @@ class Person(models.Model):
         max_length=1, choices=choices.Status.choices, default=choices.Status.SINGLE)
 
     spouse_name = custom_fields.TitleCaseCharfield(
-        max_length=globals.LONG_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.LONG_MAX_LENGTH, null=True, blank=True, default='')
     spouse_occupation = custom_fields.TitleCaseCharfield(
-        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True, default='')
     number_of_children = models.PositiveIntegerField(default=0)
 
     father_name = custom_fields.TitleCaseCharfield(
         max_length=globals.LONG_MAX_LENGTH)
     father_occupation = custom_fields.TitleCaseCharfield(
-        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True, default='')
 
     mother_name = custom_fields.TitleCaseCharfield(
         max_length=globals.LONG_MAX_LENGTH)
     mother_occupation = custom_fields.TitleCaseCharfield(
-        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True, default='')
 
     height = models.FloatField(verbose_name='Height (cm)')
     weight = models.FloatField(verbose_name='weight (kg)')
     religion = custom_fields.TitleCaseCharfield(
-        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
+        max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True, default='')
 
     def __str__(self):
         # pylint: disable=no-member
