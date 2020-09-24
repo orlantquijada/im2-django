@@ -15,7 +15,7 @@ class Person(models.Model):
         max_length=globals.DEFAULT_MAX_LENGTH)
 
     profile_pic = models.ImageField(
-        upload_to='static/images/customers/profile-pics/')
+        upload_to='images/customers/profile-pics/')
 
     city = custom_fields.TitleCaseCharfield(
         max_length=globals.DEFAULT_MAX_LENGTH)

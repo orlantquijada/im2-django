@@ -157,7 +157,7 @@
                       {% for product_image in product.product_images.all %}
                       <div class="col square">
                         
-                          <img id = "img" src="/{{ product_image.image  }}" height="230" width="230"/>
+                          <img id = "img" src="{{ product_image.image.url }}" height="230" width="230"/>
                         <br /><br />
                         <!-- <img id="img" src="{{img}}" alt=""> -->
                         <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" />
