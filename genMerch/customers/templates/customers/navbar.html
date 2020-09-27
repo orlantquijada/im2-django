@@ -6,7 +6,7 @@
       ><img src="{% static '/assets/images/logo.svg' %}" alt=""
     /></a>
     <nav class="navigation">
-      <a href="{% url 'customers:dashboard' %}" class="nav-item nav-item--selected" id="customers"
+      <a href="{% url 'customers:dashboard' %}" class="nav-item {% if is_customer %}nav-item--selected{% endif %}" id="customers"
         >Customers</a
       >
       <a href="{% url 'products:dashboard' %}" class="nav-item" id="products"

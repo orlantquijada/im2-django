@@ -53,7 +53,8 @@ class Person(models.Model):
         max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
 
     def __str__(self):
-        return self.full_name
+        # pylint: disable=no-member
+        return f'{self.id} / { self.full_name }'
 
     @property
     def full_name(self):
@@ -67,8 +68,14 @@ class Person(models.Model):
     def address(self):
         return f'{self.city}, {self.province} {self.country} {self.zip_code}'
 
+    class Meta:
+        db_table = "Person"
+
 
 class Customer(Person):
     date_registered = models.DateField(default=date.today)
     last_modified = models.DateTimeField(auto_now=True)
     employee_id = models.PositiveIntegerField()
+
+    class Meta:
+        db_table = "Customer"
