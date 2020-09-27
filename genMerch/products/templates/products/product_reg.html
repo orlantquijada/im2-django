@@ -1,218 +1,288 @@
-{% extends './base.html' %}
-{% load static %}
+{% extends './base.html' %} {% load static %} {% block scripts %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+  defer
+></script>
+<script src="{% static '/scripts/index.js' %}" defer></script>
+{% endblock scripts %} {% block stylesheets %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+/>
 
-{% block scripts %}
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
-      defer
-    ></script>
-    <script src="{% static '/scripts/index.js' %}" defer></script>
-{% endblock scripts %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+/>
+<link
+  class="jsbin"
+  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+  rel="stylesheet"
+  type="text/css"
+/>
 
-{% block stylesheets %}
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
-    />
+<link rel="stylesheet" href="{% static 'styles/main.css' %}" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    />
-    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %} 
 
-    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
-
-{% endblock stylesheets %}
-
-{% block title %} Product Registration {% endblock title %}
+{% block title %} Product Registration {% endblock title %} 
 
 {% block content %}
-    <div class="app">
-      {% include './navbar.html' with is_customer=is_customer %}
-      <main class="bg-color--gray">
-        <div class="container flex-grow-1 flex-shrink-0 py-5">
-          <div class="mb-5 p-4 bg-white shadow">
-            <h3>Product Registration</h3>
-            &nbsp;
-            <h5>Product Information:</h5>
-            <form id="prodReg" enctype="multipart/form-data" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Date Registered</label>
-                </div>
-                <div class="col-9">
-                  <input type="date" class="form-control" id="prodDateReg" name="date_reg" required />
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>SKU</label>
-                </div>
-                <div class="col-9">
-                  <input type="number" class="form-control" id="sku_id" name="sku" required />
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Category</label>
-                </div>
-                <div class="col-9">
-                  <input type="text" class="form-control" id="category_id" name="category" required />
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Name</label>
-                </div>
-                <div class="col-9">
-                  <input type="text" class="form-control" id="prodName" name="prod_name" required/>
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Brand</label>
-                </div>
-                <div class="col-9">
-                  <input type="text" class="form-control" id="prodbrand" name="prodbrand" required />
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Color</label>
-                </div>
-                <div class="col-9">
-                  <input type="text" class="form-control" id="prodcolor" name="prodColor" required/>
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Size/Dimension</label>
-                </div>
-                <div class="col-9">
-                  <input type="number" class="form-control" id="prodsize" name="prodSize" required/>
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Price</label>
-                </div>
-                <div class="col-9">
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="prodPrice"
-                    placeholder="Php"
-                    name="prodPrice"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>No. of Stocks</label>
-                </div>
-                <div class="col-9">
-                  <input type="number" class="form-control" id="prodStocks" name="prodStocks"  required/>
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col-1"></div>
-                <div class="col-2">
-                  <label>Images</label>
-                </div>
-              </div>
-              <div class="form-row mb-3">
-                <div class="col">
-                  <img id="img" src="#" alt="">
-                  <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" name="img1"/>
-                  
-                </div>
-                <div class="col">
-                  <img id="img1" src="#" alt="">
-                  <input type="file" onchange="readURL2(this);" class="form-control" id="prodimg2" name="img2" />
-                  
-                </div>
-                <div class="col">
-                  <img id="img2" src="#" alt="">
-                  <input type="file" onchange="readURL3(this);" class="form-control" id="prodimg3" name="img3" />
-                  
-                </div>
-              </div>
-              <div class="row">
-                <div class="col text-center">
-                  <button type="submit" class="btn btn-primary next">
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </form>
+<div class="app">
+  {% include './navbar.html' with is_customer=is_customer %}
+  <main class="bg-color--gray">
+    <div class="container flex-grow-1 flex-shrink-0 py-5">
+      <div class="mb-5 p-4 bg-white shadow">
+        <h3>Product Registration</h3>
+        &nbsp;
+        <h5>Product Information:</h5>
+        <form
+          id="prodReg"
+          enctype="multipart/form-data"
+          action=""
+          method="POST"
+          autocomplete="off"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Date Registered</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="date"
+                class="form-control"
+                id="prodDateReg"
+                name="date_registered"
+                required
+              />
+            </div>
           </div>
-        </div>
-      </main>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>SKU</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="number"
+                class="form-control"
+                id="sku_id"
+                min="0"
+                name="sku"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Category</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="category_id"
+                name="category"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Name</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="prodName"
+                minlength="2"
+                maxlength="50"
+                name="prod_name"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Brand</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="prodbrand"
+                minlength="2"
+                name="brand"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Color</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="prodcolor"
+                name="color"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Size/Dimension</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="number"
+                class="form-control"
+                id="prodsize"
+                min="0"
+                name="size"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Price</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="number"
+                class="form-control"
+                id="prodPrice"
+                placeholder="Php"
+                min="0"
+                name="price"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>No. of Stocks</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="number"
+                class="form-control"
+                id="prodStocks"
+                min="0"
+                name="stocks"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <label>Images</label>
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col">
+              <img id="img" src="#" alt="" />
+              <input
+                type="file"
+                onchange="readURL(this);"
+                class="form-control"
+                id="prodimg1"
+                name="img1"
+                required
+              />
+            </div>
+            <div class="col">
+              <img id="img1" src="#" alt="" />
+              <input
+                type="file"
+                onchange="readURL2(this);"
+                class="form-control"
+                id="prodimg2"
+                name="img2"
+              />
+            </div>
+            <div class="col">
+              <img id="img2" src="#" alt="" />
+              <input
+                type="file"
+                onchange="readURL3(this);"
+                class="form-control"
+                id="prodimg3"
+                name="img3"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-primary next">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script>
-       function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-              //  alert("INSIDE!");
-                reader.onload = function (e) {
-                    $('#img')
-                        .attr('src', e.target.result)
-                        .width(160)
-                        .height(160);
-                    
-                };
+  </main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script
+  class="jsbin"
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+></script>
+<script
+  class="jsbin"
+  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"
+></script>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      //  alert("INSIDE!");
+      reader.onload = function (e) {
+        $('#img').attr('src', e.target.result).width(160).height(160);
+      };
 
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 
-        function readURL2(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-               // alert("INSIDE!");
-                reader.onload = function (e) {
-                    $('#img1')
-                        .attr('src', e.target.result)
-                        .width(160)
-                        .height(160);
-                    
-                };
+  function readURL2(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      // alert("INSIDE!");
+      reader.onload = function (e) {
+        $('#img1').attr('src', e.target.result).width(160).height(160);
+      };
 
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 
-        function readURL3(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-               // alert("INSIDE!");
-                reader.onload = function (e) {
-                    $('#img2')
-                        .attr('src', e.target.result)
-                        .width(160)
-                        .height(160);
-                    
-                };
+  function readURL3(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      // alert("INSIDE!");
+      reader.onload = function (e) {
+        $('#img2').attr('src', e.target.result).width(160).height(160);
+      };
 
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
 {% endblock content %}

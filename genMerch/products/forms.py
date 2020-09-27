@@ -1,13 +1,13 @@
 from django import forms
-from .models import *
+from products import models
+
 
 class ProductForm(forms.ModelForm):
 
-    class Meta:
-        model = Product
-        fields = ['prod_name']
+    img1 = forms.ImageField(required=False)
+    img2 = forms.ImageField(required=False)
+    img3 = forms.ImageField(required=False)
 
-class ProductImageForm(forms.ModelForm):
     class Meta:
-        model = ProductImage
-        fields = ['image']
+        model = models.Product
+        fields = '__all__'

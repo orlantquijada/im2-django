@@ -81,7 +81,7 @@
                 </div>
               </div>
               <div class="bs-stepper-content">
-                <form action={% url 'customers:customer_registration' %} method="POST" enctype="multipart/form-data">
+                <form action={% url 'customers:customer_registration' %} method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                   {% csrf_token %}
                   <div
                     id="test-l-1"
@@ -96,7 +96,7 @@
                       <div class="col-4">
                         <input
                           type="date"
-                          class="form-control"
+                          class="validate form-control"
                           id="dateRegistered"
                           placeholder="Date Today"
                           name="date_registered"
@@ -107,7 +107,7 @@
                       <div class="col-4">
                         <input
                           type="text"
-                          class="form-control"
+                          class="validate form-control"
                           id="emId"
                           placeholder="Employee ID"
                           name="employee_id"
@@ -123,6 +123,7 @@
                           class="form-control"
                           id="fName"
                           placeholder="First Name"
+                          min="2"
                           name="first_name"
                           required
                         />
@@ -142,7 +143,34 @@
                           type="text"
                           class="form-control"
                           id="lName"
+                          min="2"
                           placeholder="Last Name"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-12">Contact Info</label>
+                      <div class="col">
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="Email Address"
+                          name="email"
+                          id="inputMailForm"
+                          required
+                        />
+                      </div>
+                      <div class="col">
+                        <input
+                          name="phone_number"
+                          type="tel"
+                          onkeypress="return isNumberKey(event)"
+                          class="validate form-control"
+                          placeholder="Phone Number e.g. 09xx-xxx-xxxx"
+                          pattern="[0]{1}[9]{1}[0-9]{2}-[0-9]{3}-[0-9]{4}"
+                          min='11'
+                          max='13'
                           required
                         />
                       </div>
@@ -205,7 +233,7 @@
                       </div>
                       <div class="form-group col-md-4">
                         <label class="">Sex</label>
-                        <select id="gender" name="sex" class="form-control">
+                        <select id="gender" name="sex" class="form-control" required>
                           {% for sex in form.sex %}
                             {{ sex }}
                           {% endfor %}
@@ -240,7 +268,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="mother">Mother's Name</label>
-                        <input type="text" class="form-control" id="mother" name="mother_name"/>
+                        <input type="text" class="form-control" id="mother" name="mother_name" required/>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="motherOcc">Occupation</label>
@@ -255,7 +283,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="father">Father's Name</label>
-                        <input type="text" class="form-control" id="father" name="father_name"/>
+                        <input type="text" class="form-control" id="father" name="father_name" required/>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="fatherOcc">Occupation</label>
@@ -290,9 +318,9 @@
                             <label>Profile Picture</label>
                             <input type="file" onchange="readURL(this);" class="form-control" id="prodimg1" name="profile_pic" required />
                           </div>
-                         
+
                         </div>
-                        
+
                       </div>
                       <div class="col"></div>
                     </div>
@@ -680,7 +708,6 @@
                       </button>
                       <button
                         class="btn btn-primary next"
-                        onclick="stepper1.next()"
                       >
                         Next
                       </button>
@@ -791,7 +818,48 @@
       const nextButtons = document.querySelectorAll('.next');
       nextButtons.forEach(preventDefault)
 
-      const stepper1 = new Stepper(document.querySelector('#stepper1'));
+     // const stepper1 = new Stepper(document.querySelector('#stepper1'));
+      var stepperFormEl = document.querySelector('#stepper1');
+      window.stepperForm = new Stepper(stepperFormEl, {
+        animation: true
+      })
+
+      var btnNextList = [].slice.call(document.querySelectorAll('.next'))
+      var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'))
+      var inputMailForm = document.getElementById('inputMailForm')
+      var form = stepperFormEl.querySelector('.bs-stepper-content form')
+
+      btnNextList.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          window.stepperForm.next()
+        })
+      })
+
+      stepperFormEl.addEventListener('show.bs-stepper', function (event) {
+        form.classList.remove('was-validated')
+        var nextStep = event.detail.indexStep
+        var currentStep = nextStep
+
+        if (currentStep > 0) {
+          currentStep--
+        }
+
+        var stepperPan = stepperPanList[currentStep]
+
+        if ((stepperPan.getAttribute('id') === 'test-l-1' && !inputMailForm.value.length) ) {
+          event.preventDefault()
+          form.classList.add('was-validated')
+        }
+      })
+
+      //input only numeric values
+      function isNumberKey(evt){
+          var charCode = (evt.which) ? evt.which : evt.keyCode
+          // numberic range (48-57) or hyphen (45)
+          if ((charCode >= 48 && charCode <= 57) || charCode === 45)
+              return true;
+          return false;
+      }
 
       $(document).ready(function () {
         $(this).on('click', '.appendElem', function () {
@@ -1198,7 +1266,7 @@
                         .attr('src', e.target.result)
                         .width(300)
                         .height(300);
-                    
+
                 };
 
                 reader.readAsDataURL(input.files[0]);
