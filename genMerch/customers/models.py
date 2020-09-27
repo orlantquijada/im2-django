@@ -53,7 +53,8 @@ class Person(models.Model):
         max_length=globals.DEFAULT_MAX_LENGTH, null=True, blank=True)
 
     def __str__(self):
-        return self.full_name
+        # pylint: disable=no-member
+        return f'{self.id} / { self.full_name }'
 
     @property
     def full_name(self):
