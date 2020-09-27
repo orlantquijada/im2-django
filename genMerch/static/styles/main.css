@@ -86,6 +86,10 @@ body {
   border-bottom: 1px solid rgba(51, 51, 51, 0.3);
 }
 
+.modal-content .modal-body .title .modal-backdrop {
+  z-index: -1;
+}
+
 .modal-content .modal-body strong {
   color: #007bff !important;
 }

@@ -7,6 +7,7 @@ from genMerch import views as custom_views
 class CustomerIndexTemplateView(custom_views.CustomTemplateView):
     template_name = 'customers/customers.html'
     queryset = models.Customer.objects.all()  # pylint: disable=no-member
+    default_form = forms.CustomerRegistrationModelForm
     default_context = {'is_customer': True}
 
 
@@ -23,4 +24,8 @@ class CustomerRegistrationTemplateView(custom_views.CustomTemplateView):
             form.save()
 
             return redirect(reverse('customers:dashboard'))
-        return render(request, self.template_name)
+
+        context = self.get_context_data()
+        context['has_error'] = True
+
+        return render(request, self.template_name, context=context)
