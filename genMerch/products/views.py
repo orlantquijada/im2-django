@@ -8,8 +8,35 @@ from genMerch import views as custom_views
 class ProductIndexTemplateView(custom_views.CustomTemplateView):
     template_name = 'products/products.html'
     queryset = models.Product.objects.all()  # pylint: disable=no-member
+    #default_form = forms.ProductForm
     
+    def post(self,request):
+      #  form = self.default_form(request.POST, request.FILES)
 
+        if request.method == 'POST':
+            if 'btnUpdate' in request.POST:
+                print("update clicked")
+                pid = request.POST.get("prodID")
+                pname = request.POST.get("prod_name")
+                pcat = request.POST.get("category")
+                pbrand = request.POST.get("brand")
+                pcolor = request.POST.get("color")
+                psize = request.POST.get("size")
+                pprice =request.POST.get("price")
+                pstocks = request.POST.get("stocks")
+                # imgs = request.POST.getlist("img")
+                update_product = models.Product.objects.filter(id = pid).update(prod_name = pname, category = pcat, brand = pbrand, color = pcolor,   # pylint: disable=no-member
+                                            size = psize, price = pprice, stocks = pstocks) 
+                print(update_product)
+                print("product updated")
+            elif 'btnDelete' in request.POST:
+                print("delete clicked")
+                pid = request.POST.get("prodID")
+                models.ProductImage.objects.filter(product_id = pid).delete() # pylint: disable=no-member
+                models.Product.objects.filter(id = pid).delete() # pylint: disable=no-member
+                print('product deleted')
+
+        return redirect('products:dashboard')
 
 class ProductRegistrationTemplateView(custom_views.CustomTemplateView):
     template_name = 'products/product_reg.html'
