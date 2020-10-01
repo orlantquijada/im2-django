@@ -312,6 +312,15 @@
       {% include './navbar.html' with is_customer=is_customer %}
 
       <div class="bg-color--gray">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center">
+                {{ message|safe }}
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="main-content container" data-router-view>
             <div class="row mb-2">
               <div class="col">

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 
 from customers import models, forms
 from genMerch import views as custom_views
@@ -18,6 +19,9 @@ class CustomerIndexTemplateView(custom_views.CustomTemplateView):
         if "delete" in request.POST:
             customer_instance.delete()
 
+            messages.success(
+                request, "Customer successfully <b>removed</b>.", extra_tags="info"
+            )
             return redirect("customers:dashboard")
 
         form = self.default_form(
@@ -26,6 +30,9 @@ class CustomerIndexTemplateView(custom_views.CustomTemplateView):
 
         if form.is_valid():
             form.save()
+            messages.success(
+                request, "Customer successfully <b>updated</b>.", extra_tags="primary"
+            )
 
         return redirect("customers:dashboard")
 
@@ -42,6 +49,9 @@ class CustomerRegistrationTemplateView(custom_views.CustomTemplateView):
         if form.is_valid():
             form.save()
 
+            messages.success(
+                request, "Customer successfully <b>created</b>.", extra_tags="success"
+            )
             return redirect(reverse("customers:dashboard"))
 
         context = self.get_context_data()
