@@ -31,6 +31,15 @@
 <div class="app">
   {% include './navbar.html' with is_customer=is_customer %}
   <main class="bg-color--gray">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center">
+            {{ message|safe }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <div class="container flex-grow-1 flex-shrink-0 py-5">
       <div class="mb-5 p-4 bg-white shadow">
         <h3>Product Registration</h3>

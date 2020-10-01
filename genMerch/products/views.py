@@ -19,7 +19,7 @@ class ProductIndexTemplateView(custom_views.CustomTemplateView):
         if "delete" in request.POST:
             product_instance.delete()
             messages.success(
-                request, "Product successfully <b>removed</b>.", extra_tags="info"
+                request, "Product successfully <b>removed</b>.", extra_tags="danger"
             )
 
             return redirect("products:dashboard")
@@ -63,7 +63,21 @@ class ProductIndexTemplateView(custom_views.CustomTemplateView):
                     extra_tags="primary",
                 )
 
-        return redirect("products:dashboard")
+        context = self.get_context_data()
+
+        fields_with_errors_list = []
+        for error in form.errors.keys():
+            fields_with_errors_list.append(f"<b>{ error }</b>")
+
+        context["fields with errors"] = fields_with_errors_list
+
+        messages.error(
+            request,
+            f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
+            extra_tags="danger",
+        )
+
+        return redirect("products:dashboard", context=context)
 
 
 class ProductRegistrationTemplateView(custom_views.CustomTemplateView):
@@ -97,8 +111,24 @@ class ProductRegistrationTemplateView(custom_views.CustomTemplateView):
             models.ProductImage.objects.bulk_create(product_images)
 
             messages.success(
-                request, "Customer successfully <b>created</b>.", extra_tags="success"
+                request, "Product successfully <b>created</b>.", extra_tags="success"
             )
 
             return redirect(reverse("products:dashboard"))
-        return render(request, "products/product_reg.html")
+
+        context = self.get_context_data()
+        context["has_errors"] = True
+
+        fields_with_errors_list = []
+        for error in form.errors.keys():
+            fields_with_errors_list.append(f"<b>{ error }</b>")
+
+        context["fields with errors"] = fields_with_errors_list
+
+        messages.error(
+            request,
+            f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
+            extra_tags="danger",
+        )
+
+        return render(request, "products/product_reg.html", context=context)

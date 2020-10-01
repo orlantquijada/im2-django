@@ -20,7 +20,7 @@ class CustomerIndexTemplateView(custom_views.CustomTemplateView):
             customer_instance.delete()
 
             messages.success(
-                request, "Customer successfully <b>removed</b>.", extra_tags="info"
+                request, "Customer successfully <b>removed</b>.", extra_tags="danger"
             )
             return redirect("customers:dashboard")
 
@@ -55,6 +55,18 @@ class CustomerRegistrationTemplateView(custom_views.CustomTemplateView):
             return redirect(reverse("customers:dashboard"))
 
         context = self.get_context_data()
-        context["has_error"] = True
+        context["has_errors"] = True
+
+        fields_with_errors_list = []
+        for error in form.errors.keys():
+            fields_with_errors_list.append(f"<b>{ error }</b>")
+
+        context["fields with errors"] = fields_with_errors_list
+
+        messages.error(
+            request,
+            f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
+            extra_tags="danger",
+        )
 
         return render(request, self.template_name, context=context)
