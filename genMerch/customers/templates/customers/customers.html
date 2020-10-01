@@ -264,7 +264,6 @@
                         onchange="readURL(this);"
                         class="form-control"
                         name="profile_pic"
-                        required
                       />
                     </div>
                   </div>
@@ -274,7 +273,7 @@
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-warning">Update</button>
+              <button type="submit" class="btn btn-warning" value="True" name="update">Update</button>
               <input type="hidden" name="id" value="{{ customer.id }}">
             </div>
           </form>
@@ -301,7 +300,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="submit" class="btn btn-danger" id="btnDelete" name="btnDelete">YES</button>
+                <button type="submit" class="btn btn-danger" id="btnDelete" name="delete" value="True">YES</button>
               </div>
             </form>
           </div>
