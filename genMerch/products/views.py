@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.db import transaction
+from django.contrib import messages
 
 from products import models, forms
 from genMerch import views as custom_views
@@ -17,6 +18,9 @@ class ProductIndexTemplateView(custom_views.CustomTemplateView):
 
         if "delete" in request.POST:
             product_instance.delete()
+            messages.success(
+                request, "Product successfully <b>removed</b>.", extra_tags="info"
+            )
 
             return redirect("products:dashboard")
 
@@ -53,6 +57,12 @@ class ProductIndexTemplateView(custom_views.CustomTemplateView):
                         product_image.image = form_image
                         product_image.save()
 
+                messages.success(
+                    request,
+                    "Product successfully <b>updated</b>.",
+                    extra_tags="primary",
+                )
+
         return redirect("products:dashboard")
 
 
@@ -85,6 +95,10 @@ class ProductRegistrationTemplateView(custom_views.CustomTemplateView):
 
             # pylint: disable=no-member
             models.ProductImage.objects.bulk_create(product_images)
+
+            messages.success(
+                request, "Customer successfully <b>created</b>.", extra_tags="success"
+            )
 
             return redirect(reverse("products:dashboard"))
         return render(request, "products/product_reg.html")

@@ -212,6 +212,15 @@
       <!-- <main class="main-content" data-router-wrapper> -->
 
         <div class='bg-color--gray'>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center">
+                {{ message|safe }}
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="main-content container" data-router-view>
           <!--DateFIlter-->
           <div class="row mb-2">
