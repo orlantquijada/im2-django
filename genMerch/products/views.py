@@ -8,50 +8,50 @@ from genMerch import views as custom_views
 class ProductIndexTemplateView(custom_views.CustomTemplateView):
     template_name = "products/products.html"
     queryset = models.Product.objects.all()  # pylint: disable=no-member
-    # default_form = forms.ProductForm
+    default_form = forms.ProductForm
 
     def post(self, request):
-        #  form = self.default_form(request.POST, request.FILES)
+        product_id = int(request.POST.get("id"))
+        # pylint: disable=no-member
+        product_instance = models.Product.objects.get(id=product_id)
 
-        if request.method == "POST":
-            if "btnUpdate" in request.POST:
-                print("update clicked")
-                pid = request.POST.get("prodID")
-                pname = request.POST.get("prod_name")
-                pcat = request.POST.get("category")
-                pbrand = request.POST.get("brand")
-                pcolor = request.POST.get("color")
-                psize = request.POST.get("size")
-                pprice = request.POST.get("price")
-                pstocks = request.POST.get("stocks")
+        if "delete" in request.POST:
+            product_instance.delete()
 
-                # imgs = request.POST.getlist("img")
+            return redirect("products:dashboard")
 
-                # pylint: disable=no-member
-                update_product = models.Product.objects.filter(id=pid).update(
-                    prod_name=pname,
-                    category=pcat,
-                    brand=pbrand,
-                    color=pcolor,
-                    size=psize,
-                    price=pprice,
-                    stocks=pstocks,
-                )
+        product_images = product_instance.product_images.all()
+        initial_product_images = {}
 
-                print(update_product)
-                print("product updated")
-            elif "btnDelete" in request.POST:
-                print("delete clicked")
-                pid = request.POST.get("prodID")
+        for i in range(3):
+            try:
+                product_image = product_images[i]
+            except:
+                product_image = None
 
-                # pylint: disable=no-member
-                models.ProductImage.objects.filter(
-                    product_id=pid
-                ).delete()  # pylint: disable=no-member
-                models.Product.objects.filter(
-                    id=pid
-                ).delete()  # pylint: disable=no-member
-                print("product deleted")
+            initial_product_images[f"img{i+1}"] = product_image
+
+        form = self.default_form(
+            request.POST,
+            request.FILES,
+            instance=product_instance,
+            initial=initial_product_images,
+        )
+
+        if form.is_valid():
+            if "update" in request.POST:
+                form.save()
+
+                img1 = form.cleaned_data.get("img1")
+                img2 = form.cleaned_data.get("img2")
+                img3 = form.cleaned_data.get("img3")
+
+                for form_image, product_image in zip(
+                    (img1, img2, img3), product_images
+                ):
+                    if not isinstance(form_image, models.ProductImage):
+                        product_image.image = form_image
+                        product_image.save()
 
         return redirect("products:dashboard")
 
