@@ -71,13 +71,14 @@ class ProductIndexTemplateView(custom_views.CustomTemplateView):
 
         context["fields with errors"] = fields_with_errors_list
 
-        messages.error(
-            request,
-            f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
-            extra_tags="danger",
-        )
+        if form.errors:
+            messages.error(
+                request,
+                f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
+                extra_tags="danger",
+            )
 
-        return redirect("products:dashboard", context=context)
+        return redirect("products:dashboard")
 
 
 class ProductRegistrationTemplateView(custom_views.CustomTemplateView):
@@ -125,10 +126,11 @@ class ProductRegistrationTemplateView(custom_views.CustomTemplateView):
 
         context["fields with errors"] = fields_with_errors_list
 
-        messages.error(
-            request,
-            f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
-            extra_tags="danger",
-        )
+        if form.errors:
+            messages.error(
+                request,
+                f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
+                extra_tags="danger",
+            )
 
         return render(request, "products/product_reg.html", context=context)
