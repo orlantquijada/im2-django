@@ -1,0 +1,77 @@
+{% extends './base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block scripts %}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+{% endblock scripts%}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
+{% endblock stylesheets%}
+
+{% block title %} Cart {% endblock title %}
+
+{% block content %}
+    <div class="topbar">
+        <div class="container">
+        <a href="{% url 'main:main' %}" class="logo"
+            ><img src="{% static '/assets/images/logo.svg' %}" alt=""
+        /></a>
+        <div class="nav">
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center my-5">
+                <h3>Cart<h3>
+            </div>
+        </div>
+        <form id="cart" action="" method="POST" >
+            {% csrf_token %}
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if queryset.count > 0 %}
+                        {% for product in queryset %}
+                            <tr>
+                                <td>{{product.product_name}}<input type="text" name="sid" id="sid" value="{{product.product_id}}" hidden></td>
+                                <td>{{product.price}}</td>
+                                <td>{{product.quantity}}</td>
+                                <td>{{product.price}}<input type="text" name="cid" id="cid" value="{{product.id}}" hidden></td>
+                            </tr>
+                        {% endfor %}   
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>TOTAL: Php</td> <!--di ko kaybaw HAHAHAHAH-->
+                            </tr>
+                            
+                    {% else %}
+                       <tr>
+                           <td><h3>There are no products in your Cart.</h3></td>
+                       </tr>
+                    {% endif %}          
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col text-right">
+                    <button type="submit" class="btn btn-danger" name="cancel" id="cancel">Cancel Order</button>
+                    <button type="submit" class="btn btn-warning" name="purchase" id="purchase">Purchase</button>
+                </div>
+            </div>
+        </form> 
+    </div>
+   
+{% endblock content %}
