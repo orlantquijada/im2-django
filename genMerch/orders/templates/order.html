@@ -1,0 +1,80 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+{% endblock scripts%}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
+{% endblock stylesheets%}
+
+{% block title %} Order {% endblock title %}
+
+{% block content %}
+    <div class="topbar">
+        <div class="container">
+        <a href="#" class="logo"
+            ><img src="{% static '/assets/images/logo.svg' %}" alt=""
+        /></a>
+        <div class="nav">
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center mt-4 mb-2">
+            <h4>GenMerch Products<h4>
+        </div>
+    </div>
+    <form id="order" action="" method="POST" >
+        {% csrf_token %}
+        <div class="row mb-3">
+            {% for product in queryset %}
+                {% if product.stocks > 0 %}
+                    <div class="col-6 text-center my-3">
+                        <div class="card mx-auto" style="width: 80%; height: 100%;" >
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.prod_name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{product.brand}}</h6>
+                                <div class="row">
+                                    {% for product_image in product.product_images.all %}
+                                        <div class="col-4">
+                                            <img id="{{ product_image.id }}-img" src="{{ product_image.image.url }}" height="100%" width="100%"/>        
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <p class="my-2">{{product.category}}</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        Color: <b>{{product.color}}</b>
+                                    </div>
+                                    <div class="col-6">
+                                        Size: <b>{{product.size}}</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        Price: <b>Php {{product.price}}</b>
+                                    </div>
+                                    <div class="col-6">
+                                        In Stocks: <b>{{product.stocks}}</b>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <input type="checkbox" id="prodSelected" name="id" value="{{product.id}}">
+                                <label for="prodSelected">Select to Buy</label><br>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-success" name="buyBtn" id="buyBtn">Buy Selected Items</button>
+            </div>
+        </div> 
+    </form> 
+{% endblock content %}

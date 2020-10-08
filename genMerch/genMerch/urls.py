@@ -25,6 +25,7 @@ urlpatterns = [
     path('customers/', include('customers.urls', namespace='customers')),
     path('products/', include('products.urls', namespace='products')),
     path('main/', include('main.urls', namespace='main')),
+    path('orders/',include('orders.urls',namespace='orders')),
     path('', redirect_home, name='redirect_home')
 ]
 
