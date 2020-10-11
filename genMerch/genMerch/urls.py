@@ -21,12 +21,19 @@ from django.conf.urls.static import static
 from main.views import redirect_home
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('customers/', include('customers.urls', namespace='customers')),
-    path('products/', include('products.urls', namespace='products')),
-    path('main/', include('main.urls', namespace='main')),
-    path('orders/',include('orders.urls',namespace='orders')),
-    path('', redirect_home, name='redirect_home')
+    path("admin2/", admin.site.urls),
+    path(
+        "admin/",
+        include(
+            [
+                path("customers/", include("customers.urls", namespace="customers")),
+                path("products/", include("products.urls", namespace="products")),
+            ]
+        ),
+    ),
+    path("main/", include("main.urls", namespace="main")),
+    path("orders/", include("orders.urls", namespace="orders")),
+    path("", redirect_home, name="redirect_home"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

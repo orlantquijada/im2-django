@@ -627,4 +627,13 @@ body {
 .topbar .container .nav .nav-item:hover {
   color: #0069ff;
 }
+
+.topbar .container .nav .nav-item.cta {
+  color: #0069ff;
+}
+
+.topbar .container .nav .nav-item.cta:hover {
+  -webkit-filter: brightness(150%);
+          filter: brightness(150%);
+}
 /*# sourceMappingURL=main.css.map */

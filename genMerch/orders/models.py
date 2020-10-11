@@ -1,17 +1,58 @@
 from django.db import models
+from django.utils.functional import cached_property
 
-# Create your models here.
+from customers import models as customers_models
+from products import models as products_models
+
+
+class Order(models.Model):
+    datetime_created = models.DateTimeField(auto_now_add=True)
+    datetime_updated = models.DateTimeField(auto_now=True)
+
+    customer = models.ForeignKey(
+        to=customers_models.Customer, on_delete=models.CASCADE, blank=True, null=True
+    )
+    payment_received = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.customer if self.customer else self.id}"  # pylint: disable=no-member
+
+    @cached_property
+    def total(self) -> float:
+        total = 0
+
+        for order_item in self.order_items:  # pylint: disable=no-member
+            total += order_item.product.price * order_item.quantity
+
+        return total
+
+    @cached_property
+    def is_paid(self) -> bool:
+        return self.payment_received == None
+
+
+class OrderItem(models.Model):
+    product = models.ForeignKey(to=products_models.Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    order = models.ForeignKey(to=Order, on_delete=models.CASCADE)
+
+    class Meta:
+        default_related_name = "order_items"
+
 
 class OrderProduct(models.Model):
-    product_id = models.IntegerField()
-    quantity = models.IntegerField(null=True)
+    product_id = models.ForeignKey(to=products_models.Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
     class Meta:
-        db_table = 'OrderProduct'
+        db_table = "OrderProduct"
+
 
 class Cart(models.Model):
-    product_id = models.IntegerField()
+    product_id = models.ForeignKey(to=products_models.Product, on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField()
-    product_name = models.CharField(max_length=100,null=True)
+    product_name = models.CharField(max_length=100, null=True)
+
     class Meta:
-        db_table = 'Cart'
+        db_table = "Cart"

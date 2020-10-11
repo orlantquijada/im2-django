@@ -45,7 +45,7 @@
                     {% if queryset.count > 0 %}
                         {% for product in queryset %}
                             <tr>
-                                <td>{{product.product_name}}<input type="text" name="sid" id="sid" value="{{product.product_id}}" hidden></td>
+                                <td>{{product.product_name}}<input type="text" name="sid" id="sid" value="{{product.product_id.id}}" hidden></td>
                                 <td>{{product.price}}</td>
                                 <td>{{product.quantity}}</td>
                                 <td>{{product.price}}<input type="text" name="cid" id="cid" value="{{product.id}}" hidden></td>
@@ -55,7 +55,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>TOTAL: Php</td> <!--di ko kaybaw HAHAHAHAH-->
+                                <td>TOTAL: Php {{ total }}</td> 
                             </tr>
                             
                     {% else %}

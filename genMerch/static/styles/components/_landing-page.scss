@@ -135,6 +135,14 @@
       &:hover {
         color: #0069ff;
       }
+
+      &.cta {
+        color: #0069ff;
+
+        &:hover {
+          filter: brightness(150%);
+        }
+      }
     }
   }
 }

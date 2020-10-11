@@ -43,7 +43,7 @@
                                     <div class="row">
                                         {% for product_image in product.product_images.all %}
                                             <div class="col-4">
-                                                <img id="{{ product_image.id }}-img" src="{{ product_image.image.url }}" height="100%" width="100%"/>        
+                                                <img id="{{ product_image.id }}-img" src="{{ product_image.image.url }}" height="100%" width="100%"/>
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -65,8 +65,8 @@
                                         </div>
                                     </div>
                                     <br><br>
-                                    <input type="checkbox" id="prodSelected" name="id" value="{{product.id}}">
-                                    <label for="prodSelected">Select to Buy</label><br>
+                                    <input type="checkbox" id="{{ product.id }}" name="id" value="{{product.id}}">
+                                    <label for="{{ product.id }}" style="cursor: pointer;">Select to Buy</label><br>
                                 </div>
                             </div>
                         </div>
@@ -76,16 +76,16 @@
             <div class="row mt-4">
                 <div class="col text-center">
                     <button type="submit" class="btn btn-primary" name="addCart" id="addCart">Add Selected Items to Cart</button>
-                </div>    
+                </div>
             </div>
             <div class="row mt-4">
                 <div class="col text-center">
                     <a href="{% url 'orders:cart' %}">
                         <button type="button" class="btn btn-warning">Go to Cart</button>
                     </a>
-                </div>    
-            </div>  
-        </form> 
+                </div>
+            </div>
+        </form>
     </div>
-    
+
 {% endblock content %}
