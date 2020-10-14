@@ -15,7 +15,9 @@ class OrderTemplateView(custom_views.CustomTemplateView):
         form = self.default_form(request.POST)
         product_ids = [int(id) for id in request.POST.getlist("id")]
 
-        update_products = products_models.Product.objects.filter(id__in=product_ids)
+        update_products = products_models.Product.objects.filter(
+            id__in=product_ids
+        )  # pylint: disable=no-member
 
         for product in update_products:
             form = orders_models.Cart(
@@ -62,4 +64,3 @@ class CartTemplateView(custom_views.CustomTemplateView):
             ).delete()  # pylint: disable=no-member
 
         return redirect(reverse("orders:orders"))
-
