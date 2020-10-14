@@ -3,9 +3,10 @@ from django.utils.functional import cached_property
 
 from customers import models as customers_models
 from products import models as products_models
+from main import models as main_models
 
 
-class Order(models.Model):
+class Order(main_models.SoftDeletionModel):
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_updated = models.DateTimeField(auto_now=True)
 
@@ -31,7 +32,7 @@ class Order(models.Model):
         return self.payment_received == None
 
 
-class OrderItem(models.Model):
+class OrderItem(main_models.SoftDeletionModel):
     product = models.ForeignKey(to=products_models.Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE)
@@ -40,7 +41,7 @@ class OrderItem(models.Model):
         default_related_name = "order_items"
 
 
-class OrderProduct(models.Model):
+class OrderProduct(main_models.SoftDeletionModel):
     product_id = models.ForeignKey(to=products_models.Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
@@ -48,7 +49,7 @@ class OrderProduct(models.Model):
         db_table = "OrderProduct"
 
 
-class Cart(models.Model):
+class Cart(main_models.SoftDeletionModel):
     product_id = models.ForeignKey(to=products_models.Product, on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField()
