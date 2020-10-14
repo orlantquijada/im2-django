@@ -63,24 +63,3 @@ class CartTemplateView(custom_views.CustomTemplateView):
 
         return redirect(reverse("orders:orders"))
 
-
-class OrderTemplateViewV2(custom_views.CustomTemplateView):
-    template_name = "order2.html"
-    queryset = products_models.Product.objects.all()  # pylint: disable=no-member
-    default_form = orders_forms.CartForm
-
-    def post(self, request):
-        form = self.default_form(request.POST)
-        product_ids = [int(id) for id in request.POST.getlist("id")]
-
-        update_products = products_models.Product.objects.filter(id__in=product_ids)
-
-        for product in update_products:
-            form = orders_models.Cart(
-                product_id_id=product.id,
-                price=product.price,
-                quantity=1,
-                product_name=product.prod_name,
-            )
-            form.save()
-        return redirect(reverse("orders:orders"))

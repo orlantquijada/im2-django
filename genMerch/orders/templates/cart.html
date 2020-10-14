@@ -50,19 +50,19 @@
                                 <td>{{product.quantity}}</td>
                                 <td>{{product.price}}<input type="text" name="cid" id="cid" value="{{product.id}}" hidden></td>
                             </tr>
-                        {% endfor %}   
+                        {% endfor %}
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>TOTAL: Php {{ total }}</td> 
+                                <td>TOTAL: Php {{ total }}</td>
                             </tr>
-                            
+
                     {% else %}
                        <tr>
                            <td><h3>There are no products in your Cart.</h3></td>
                        </tr>
-                    {% endif %}          
+                    {% endif %}
                 </tbody>
             </table>
             <div class="row">
@@ -71,7 +71,7 @@
                     <button type="submit" class="btn btn-warning" name="purchase" id="purchase">Purchase</button>
                 </div>
             </div>
-        </form> 
+        </form>
     </div>
-   
+
 {% endblock content %}
