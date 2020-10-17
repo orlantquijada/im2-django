@@ -34,6 +34,22 @@ class CustomerIndexTemplateView(custom_views.CustomTemplateView):
                 request, "Customer successfully <b>updated</b>.", extra_tags="primary"
             )
 
+        context = self.get_context_data()
+        context["has_errors"] = True
+
+        fields_with_errors_list = []
+        for error in form.errors.keys():
+            fields_with_errors_list.append(f"<b>{ error }</b>")
+
+        context["fields with errors"] = fields_with_errors_list
+
+        if form.errors:
+            messages.error(
+                request,
+                f"Incorrect fields: { ', '.join(fields_with_errors_list) }",
+                extra_tags="danger",
+            )
+
         return redirect("customers:dashboard")
 
 
